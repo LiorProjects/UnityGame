@@ -8,6 +8,7 @@ public class TestCMD : MonoBehaviour
     void Start()
     {
         Debug.Log("Test2");
+        Debug.Log("Test3");
     }
 
     // Update is called once per frame
