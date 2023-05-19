@@ -31,20 +31,28 @@ public class Player : MonoBehaviour
         {
             //set new values to the vector
             direction = Vector3.up * strength;
-            Debug.Log(direction.y);
-            Debug.Log("test     ");
-            
-            
+            Debug.Log(transform.position.ToString());            
         }
         direction.y += gravity * Time.deltaTime;
         transform.position += direction * Time.deltaTime;
-        if(direction.y == -1*Screen.height)
+        // Check if the player has touched the top of the screen
+        if (transform.position.y >= 4.9f)
         {
-            direction.y = 0;
-            transform.position = direction;
+            // Perform any necessary actions when the player touches the top
+            Debug.Log(""+transform.position.y);
+            Die();
         }
     }
+    private void Die()
+    {
+        // Add your code here to handle the player's death
+        // For example, you can show a game over screen, play a sound effect, etc.
 
+        // Disable the player object to prevent further movement
+        transform.position = new Vector3(0, -5, 0);
+
+        gameObject.SetActive(true);
+    }
     //used in Start()
     private void AnimateSprite()
     {
