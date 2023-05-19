@@ -35,24 +35,39 @@ public class Player : MonoBehaviour
         }
         direction.y += gravity * Time.deltaTime;
         transform.position += direction * Time.deltaTime;
+        
+        //rotate on Z
+        if(direction.y > 0)
+        {
+            transform.localRotation = Quaternion.Euler(0f, 0f, 15);
+
+        }
+        else
+        {
+            transform.localRotation = Quaternion.Euler(0f, 0f, 0);
+
+        }
         // Check if the player has touched the top of the screen
         if (transform.position.y >= 4.9f)
         {
             // Perform any necessary actions when the player touches the top
             Debug.Log(""+transform.position.y);
-            Die();
+            transform.position = new Vector3(0, -4.9f, 0);
         }
+        
     }
-    private void Die()
-    {
-        // Add your code here to handle the player's death
-        // For example, you can show a game over screen, play a sound effect, etc.
+    //private void Die()
+    //{
+    //    // Add your code here to handle the player's death
+    //    // For example, you can show a game over screen, play a sound effect, etc.
 
-        // Disable the player object to prevent further movement
-        transform.position = new Vector3(0, -5, 0);
+    //    // Disable the player object to prevent further movement
+    //    transform.position = new Vector3(0, -4.9f, 0);
 
-        gameObject.SetActive(true);
-    }
+    //    gameObject.SetActive(true);
+    //}
+    
+    
     //used in Start()
     private void AnimateSprite()
     {
