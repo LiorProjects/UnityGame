@@ -40,19 +40,19 @@ public class Player : MonoBehaviour
         if(direction.y > 0)
         {
             transform.localRotation = Quaternion.Euler(0f, 0f, 15f);
-
+            
         }
         else
-        {
+        { 
             transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
 
         }
         // Check if the player has touched the top of the screen
-        if (transform.position.y >= 5.2f)
+        if (transform.position.y >= 5.8f)
         {
             // transform the player to bottom
             Debug.Log(""+transform.position.y);
-            transform.position = new Vector3(0, -5.2f, 0);
+            transform.position = new Vector3(0, -5.8f, 0);
         }
         
     }
