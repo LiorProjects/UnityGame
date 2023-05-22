@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
         {
             // transform the player to bottom
             Debug.Log(""+transform.position.y);
-            transform.position = new Vector3(0, -5.8f, 0);
+            transform.position = new Vector3(0, -5.8f, -1);
         }
         
     }
