@@ -217,7 +217,7 @@ GameObject:
   m_Component:
   - component: {fileID: 775588937}
   - component: {fileID: 775588938}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 2_Desert
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,7 +301,7 @@ GameObject:
   m_Component:
   - component: {fileID: 784462892}
   - component: {fileID: 784462893}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 2_Desert
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -388,7 +388,7 @@ GameObject:
   - component: {fileID: 913585733}
   - component: {fileID: 913585732}
   - component: {fileID: 913585736}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bird_01
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -492,12 +492,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 913585730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &913585736
 MonoBehaviour:
@@ -527,7 +527,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1438889594}
   - component: {fileID: 1438889595}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 2_Desert
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -613,9 +613,9 @@ GameObject:
   - component: {fileID: 1517138763}
   - component: {fileID: 1517138762}
   - component: {fileID: 1517138761}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BackGround
-  m_TagString: Untagged
+  m_TagString: background
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -636,7 +636,7 @@ Transform:
   - {fileID: 1438889594}
   - {fileID: 775588937}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1517138761
 BoxCollider2D:
