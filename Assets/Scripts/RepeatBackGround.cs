@@ -10,7 +10,7 @@ public class RepeatBackGround : MonoBehaviour
     void Start()
     {
         position = transform.position;
-        repeatX = GetComponent<BoxCollider2D>().size.x;
+        repeatX = GetComponent<BoxCollider2D>().size.x * 2;
     }
 
     // Update is called once per frame

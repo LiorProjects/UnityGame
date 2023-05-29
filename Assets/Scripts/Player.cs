@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -13,7 +12,6 @@ public class Player : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public Sprite[] sprites;
     private int spriteIndex;
-    private int score = 0;
 
 
     private void Awake()
@@ -33,6 +31,7 @@ public class Player : MonoBehaviour
         {
             //set new values to the vector
             direction = Vector3.up * strength;
+            Debug.Log(transform.position.ToString());            
         }
         direction.y += gravity * Time.deltaTime;
         transform.position += direction * Time.deltaTime;
@@ -52,6 +51,7 @@ public class Player : MonoBehaviour
         if (transform.position.y >= 5.8f)
         {
             // transform the player to bottom
+            Debug.Log(""+transform.position.y);
             transform.position = new Vector3(0, -5.8f, -1);
         }
         
@@ -77,22 +77,5 @@ public class Player : MonoBehaviour
             spriteIndex = 0;
         }
         spriteRenderer.sprite = sprites[spriteIndex];
-    }
-
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.name == "PipeDown" || collision.gameObject.name == "PipeUp")
-    //    {
-    //        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    //        score = 0;
-    //    }
-    //}
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.name == "GainScore")
-        {
-            Debug.Log("Score: " + ++score);
-        }
     }
 }
