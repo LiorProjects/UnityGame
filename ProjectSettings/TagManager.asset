@@ -6,6 +6,7 @@ TagManager:
   tags:
   - background
   - player
+  - RemovePipe
   layers:
   - Default
   - TransparentFX
