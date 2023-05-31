@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
         {
             Debug.Log("\tScore: " + ++myScore + "\n\t\tCoins: " + myCoins);
         }
-        if(collision.gameObject.name == "Coin")
+        if(collision.gameObject.tag == "RemoveCoin")
         {
             myCoins++;
             Destroy(collision.gameObject);
