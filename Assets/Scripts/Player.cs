@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
         if (transform.position.y >= 5.8f)
         {
             // transform the player to bottom
-            transform.position = new Vector3(0, -5.8f, -1);
+            transform.position = new Vector3(0, -5.8f, -5);
         }
         
     }
