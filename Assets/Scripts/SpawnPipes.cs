@@ -8,9 +8,10 @@ public class SpawnPipes : MonoBehaviour
 {
     public GameObject fab;
     private float FirstDelay = 0f; //How much time it take to be shown on the screen for the first time
-    private float NextDelay = 2.4f; //How much time needed to be waited before called the function again
-    private float pipeMax = -2f;
-    private float pipeMin = 2f;
+    private float NextDelay = 2.1f; //How much time needed to be waited before called the function again
+    private float pipeMax = 1f;
+    private float pipeMin = 5f;
+    public Sprite coin;
 
     private void OnEnable()
     {
@@ -25,7 +26,7 @@ public class SpawnPipes : MonoBehaviour
     {
         //Creates new pipe in a random position
         GameObject myPipes = Instantiate(fab, transform.position, Quaternion.identity);
-        myPipes.transform.position +=  Vector3.up * Random.Range(pipeMin, pipeMax);
+        myPipes.transform.position += Vector3.up * Random.Range(pipeMin, pipeMax);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

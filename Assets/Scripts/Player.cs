@@ -13,8 +13,8 @@ public class Player : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public Sprite[] sprites;
     private int spriteIndex;
-    private int score = 0;
-
+    private int myScore = 0;
+    private int myCoins = 0;
 
     private void Awake()
     {
@@ -92,7 +92,12 @@ public class Player : MonoBehaviour
     {
         if(collision.gameObject.name == "GainScore")
         {
-            Debug.Log("Score: " + ++score);
+            Debug.Log("\tScore: " + ++myScore + "\n\t\tCoins: " + myCoins);
+        }
+        if(collision.gameObject.name == "Coin")
+        {
+            myCoins++;
+            Destroy(collision.gameObject);
         }
     }
 }
