@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Player : MonoBehaviour
 {
@@ -13,8 +14,9 @@ public class Player : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public Sprite[] sprites;
     private int spriteIndex;
-    private int myScore = 0;
+    public int myScore = 0;
     private int myCoins = 0;
+    private Sounds playSound;
 
     private void Awake()
     {
@@ -23,6 +25,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        playSound = GameObject.FindObjectOfType<Sounds>();
         InvokeRepeating(nameof(AnimateSprite), 0.15f, 0.15f);
     }
     // Update is called once per frame
@@ -33,6 +36,7 @@ public class Player : MonoBehaviour
         {
             //set new values to the vector
             direction = Vector3.up * strength;
+            playSound.jumpSound();
         }
         direction.y += gravity * Time.deltaTime;
         transform.position += direction * Time.deltaTime;
@@ -79,14 +83,13 @@ public class Player : MonoBehaviour
         spriteRenderer.sprite = sprites[spriteIndex];
     }
 
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.name == "PipeDown" || collision.gameObject.name == "PipeUp")
-    //    {
-    //        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    //        score = 0;
-    //    }
-    //}
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "RemovePipe")
+        {
+            playSound.hitSound();
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -96,6 +99,7 @@ public class Player : MonoBehaviour
         }
         if(collision.gameObject.tag == "RemoveCoin")
         {
+            playSound.coinSound();
             myCoins++;
             Destroy(collision.gameObject);
         }

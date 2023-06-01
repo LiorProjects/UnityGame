@@ -10,9 +10,9 @@ public class PipeSpeed : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector3.left * Time.deltaTime * speed);
-        //if(Player.myScore % 2 == 0 && Player.myScore > 1)
+        //if (player.getScore() % 2 == 0 && player.getScore() > 1)
         //{
-        //    speed += 0.2f;
+        //    speed += 1.0f;
         //}
     }
 }
