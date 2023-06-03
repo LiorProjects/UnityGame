@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
@@ -11,12 +12,13 @@ public class Player : MonoBehaviour
     private Vector3 direction;
     public float gravity = -9.8f;
     public float strength = 7f;
+    private int spriteIndex;
+    private int playerScore = 0;
+    private int playerCoins = 0;
     private SpriteRenderer spriteRenderer;
     public Sprite[] sprites;
-    private int spriteIndex;
-    public int myScore = 0;
-    private int myCoins = 0;
     private Sounds playSound;
+    public InGameTextUI inGameTextUI;
 
     private void Awake()
     {
@@ -95,12 +97,12 @@ public class Player : MonoBehaviour
     {
         if(collision.gameObject.name == "GainScore")
         {
-            Debug.Log("\tScore: " + ++myScore + "\n\t\tCoins: " + myCoins);
+            inGameTextUI.scoreText(++playerScore);
         }
         if(collision.gameObject.tag == "RemoveCoin")
         {
             playSound.coinSound();
-            myCoins++;
+            inGameTextUI.coinsText(++playerCoins);
             Destroy(collision.gameObject);
         }
     }
