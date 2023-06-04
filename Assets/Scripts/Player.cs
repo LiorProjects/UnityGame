@@ -33,6 +33,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        // Check if the game has not started yet and the player presses a key or mouse button
+        
         //getting input from keyboard or mouse
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetMouseButtonDown(0))
         {
@@ -62,16 +64,7 @@ public class Player : MonoBehaviour
         }
         
     }
-    //private void Die()
-    //{
-    //    // Add your code here to handle the player's death
-    //    // For example, you can show a game over screen, play a sound effect, etc.
-
-    //    // Disable the player object to prevent further movement
-    //    transform.position = new Vector3(0, -4.9f, 0);
-
-    //    gameObject.SetActive(true);
-    //}
+    
     
     
     //used in Start()
@@ -85,11 +78,18 @@ public class Player : MonoBehaviour
         spriteRenderer.sprite = sprites[spriteIndex];
     }
 
+
+    //Collision a Pole
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "RemovePipe")
         {
             playSound.hitSound();
+            //SceneManager.LoadScene("BirdJumper");
+            
+            transform.localRotation = Quaternion.Euler(0f, 0f, 270f);
+            SceneManager.LoadScene("MainMenu");
+
         }
     }
 
@@ -105,5 +105,7 @@ public class Player : MonoBehaviour
             inGameTextUI.coinsText(++playerCoins);
             Destroy(collision.gameObject);
         }
+       
     }
+    
 }
