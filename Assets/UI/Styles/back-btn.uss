@@ -1,0 +1,25 @@
+.back-btn {
+    position: relative;
+    font-size: 48px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: 0;
+    bottom: 8%;
+    background-color: rgba(59, 125, 204, 255);
+    -unity-background-image-tint-color: rgba(255, 255, 255, 255);
+    color: rgba(255, 255, 255, 255);
+}
+
+.back-btn:hover {
+    position: relative;
+    font-size: 48px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: 0;
+    bottom: 8%;
+    background-color: rgb(110, 170, 219);
+    -unity-background-image-tint-color: rgb(137, 111, 113);
+    color: rgb(255, 255, 255);
+}
