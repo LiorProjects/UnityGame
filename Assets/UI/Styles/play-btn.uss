@@ -1,9 +1,9 @@
 .play-btn-style {
     margin-right: auto;
     margin-left: auto;
-    top: 25%;
-    height: 40px;
-    width: 150px;
+    top: 12%;
+    height: 6%;
+    width: 14%;
     -unity-slice-top: 0;
     translate: 0 0;
     -unity-slice-right: 0;
@@ -17,6 +17,7 @@
     border-bottom-color: rgb(255, 255, 255);
     background-color: rgb(70, 101, 156);
     color: rgb(255, 255, 255);
+    font-size: 12px;
 }
 
 .play-btn-style:hover {

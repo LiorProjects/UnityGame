@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BirdJumper.unity
     guid: 405a07977b8371944acfbc02dfd9e5a7
+  - enabled: 1
+    path: Assets/Scenes/Shop.unity
+    guid: 622a84c89e5a7924cb0ed774bbed2a72
   m_configObjects: {}
