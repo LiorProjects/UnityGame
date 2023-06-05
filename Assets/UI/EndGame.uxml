@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/play-again-btn.uss?fileID=7433441132597879392&amp;guid=0f5c0253e99d2ae408b2a9d573a3f393&amp;type=3#play-again-btn" />
+    <ui:VisualElement name="display-end-screen" style="display: none; position: relative; height: auto; width: auto; flex-grow: 1; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; left: 0; top: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0);">
+        <ui:GroupBox name="box" style="background-color: rgba(50, 50, 50, 0.49); margin-left: auto; margin-right: auto; margin-top: auto; margin-bottom: auto; height: 70%; justify-content: center; align-items: center; top: auto; bottom: auto; position: relative; left: auto; right: auto; width: 20%; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); -unity-background-scale-mode: stretch-to-fill; border-top-left-radius: 30px; border-bottom-left-radius: 30px; border-top-right-radius: 30px; border-bottom-right-radius: 30px;">
+            <ui:Label text="GameOver" display-tooltip-when-elided="true" name="game-over" style="position: absolute; top: 30px; font-size: 48px; -unity-font-style: bold; background-color: rgba(0, 0, 0, 0.4); border-top-left-radius: 20px; border-bottom-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; color: rgb(255, 255, 255);" />
+            <ui:Button text="Play Again" display-tooltip-when-elided="true" name="play-again-btn" class="play-again-btn" style="overflow: visible; top: 15%;" />
+            <ui:Button text="Main Menu" display-tooltip-when-elided="true" name="main-menu-btn" class="play-again-btn" style="overflow: visible; bottom: 15%; top: auto; display: flex;" />
+        </ui:GroupBox>
+    </ui:VisualElement>
+</ui:UXML>

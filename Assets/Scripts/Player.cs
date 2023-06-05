@@ -1,24 +1,23 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class Player : MonoBehaviour
 {
     //variables of a player
-    private Vector3 direction;
     public float gravity = -9.8f;
     public float strength = 7f;
     private int spriteIndex;
     private int playerScore = 0;
     private int playerCoins = 0;
+    private Vector3 direction;
     private SpriteRenderer spriteRenderer;
     public Sprite[] sprites;
     private Sounds playSound;
     public InGameTextUI inGameTextUI;
+    public EndGameTextUI endGameTextUI;
+    private Camera gameCamera;
 
     private void Awake()
     {
@@ -27,7 +26,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        playSound = GameObject.FindObjectOfType<Sounds>();
+        gameCamera = Camera.main;
+        playSound = FindObjectOfType<Sounds>();
         InvokeRepeating(nameof(AnimateSprite), 0.15f, 0.15f);
     }
     // Update is called once per frame
@@ -40,7 +40,8 @@ public class Player : MonoBehaviour
         {
             //set new values to the vector
             direction = Vector3.up * strength;
-            playSound.jumpSound();
+            if (Time.timeScale != 0f)
+                playSound.jumpSound();
         }
         direction.y += gravity * Time.deltaTime;
         transform.position += direction * Time.deltaTime;
@@ -49,24 +50,18 @@ public class Player : MonoBehaviour
         if(direction.y > 0)
         {
             transform.localRotation = Quaternion.Euler(0f, 0f, 15f);
-            
         }
         else
         { 
             transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
-
         }
         // Check if the player has touched the top of the screen
-        if (transform.position.y >= 5.8f)
+        Vector3 screenPosition = gameCamera.WorldToScreenPoint(transform.position);
+        if(screenPosition.y < 0 || screenPosition.y > Screen.height)
         {
-            // transform the player to bottom
-            transform.position = new Vector3(0, -5.8f, -5);
+            pauseAndEndGame();
         }
-        
     }
-    
-    
-    
     //used in Start()
     private void AnimateSprite()
     {
@@ -78,26 +73,23 @@ public class Player : MonoBehaviour
         spriteRenderer.sprite = sprites[spriteIndex];
     }
 
-
     //Collision a Pole
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "RemovePipe")
         {
             playSound.hitSound();
-            //SceneManager.LoadScene("BirdJumper");
-            
-            transform.localRotation = Quaternion.Euler(0f, 0f, 270f);
-            SceneManager.LoadScene("MainMenu");
-
+            pauseAndEndGame();
         }
     }
 
+    //If the player hit an obstacle
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.name == "GainScore")
         {
             inGameTextUI.scoreText(++playerScore);
+            Time.timeScale += 0.05f;
         }
         if(collision.gameObject.tag == "RemoveCoin")
         {
@@ -105,7 +97,11 @@ public class Player : MonoBehaviour
             inGameTextUI.coinsText(++playerCoins);
             Destroy(collision.gameObject);
         }
-       
     }
-    
+    //End the current game
+    void pauseAndEndGame()
+    {
+        Time.timeScale = 0f;
+        endGameTextUI.displayEndGameScreen();
+    }
 }
