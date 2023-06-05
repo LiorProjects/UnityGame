@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 {
     //variables of a player
     public float gravity = -9.8f;
-    public float strength = 7f;
+    public float strength = 5f;
     private int spriteIndex;
     private int playerScore = 0;
     private int playerCoins = 0;
