@@ -7,6 +7,8 @@ TagManager:
   - background
   - player
   - RemovePipe
+  - RemoveCoin
+  - Shop
   layers:
   - Default
   - TransparentFX

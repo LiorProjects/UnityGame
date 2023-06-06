@@ -706,7 +706,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 913585730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -733,6 +733,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 477a76ff29832b2499b9244de7070326, type: 3}
   inGameTextUI: {fileID: 382752874}
   endGameTextUI: {fileID: 1057874470}
+  testCharacter:
+  - {fileID: 21300000, guid: 4dd317f6b25b08645b89d121a148b67c, type: 3}
+  - {fileID: 21300000, guid: 6c19da0082ace7040bb9a208217bc269, type: 3}
+  - {fileID: 21300000, guid: 2e51e159e3b4e3841b86af547ff58152, type: 3}
 --- !u!1 &1057874466
 GameObject:
   m_ObjectHideFlags: 0

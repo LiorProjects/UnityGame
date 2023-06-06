@@ -6,9 +6,9 @@
     margin-top: auto;
     margin-bottom: 0;
     bottom: 8%;
-    background-color: rgba(59, 125, 204, 255);
-    -unity-background-image-tint-color: rgba(255, 255, 255, 255);
-    color: rgba(255, 255, 255, 255);
+    background-color: rgb(59, 125, 204);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
 }
 
 .back-btn:hover {
@@ -22,4 +22,34 @@
     background-color: rgb(110, 170, 219);
     -unity-background-image-tint-color: rgb(137, 111, 113);
     color: rgb(255, 255, 255);
+}
+
+.buy-btn {
+    width: 68px;
+    top: 10%;
+    background-color: rgba(54, 120, 188, 255);
+    color: rgba(255, 255, 255, 255);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+}
+
+.buy-btn:hover {
+    width: 68px;
+    top: 10%;
+    background-color: rgb(73, 139, 207);
+    color: rgb(255, 255, 255);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
 }

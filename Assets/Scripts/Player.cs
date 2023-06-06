@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.U2D;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -19,6 +20,9 @@ public class Player : MonoBehaviour
     public EndGameTextUI endGameTextUI;
     private Camera gameCamera;
 
+    [SerializeField] private Sprite[] testCharacter;
+    private String birdChar;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -29,6 +33,12 @@ public class Player : MonoBehaviour
         gameCamera = Camera.main;
         playSound = FindObjectOfType<Sounds>();
         InvokeRepeating(nameof(AnimateSprite), 0.15f, 0.15f);
+        birdChar = PlayerPrefs.GetString("Blue_Bird");
+        LoadFirstCharacterImageFrame();
+        //if (myVal == "Blue")
+        //{
+        //    LoadCharacter();//YOU ARE HERE you can use myval2 = myval
+        //}
     }
     // Update is called once per frame
     private void Update()
@@ -65,12 +75,33 @@ public class Player : MonoBehaviour
     //used in Start()
     private void AnimateSprite()
     {
+        if(birdChar == "Blue")
+        {
+            LoadCharacter(testCharacter);
+        }
+        else
+        {
+            spriteIndex++;
+            if(spriteIndex >= sprites.Length)
+            {
+                spriteIndex = 0;
+            }
+            spriteRenderer.sprite = sprites[spriteIndex];
+        }
+    }
+
+    public void LoadCharacter(Sprite[] name)
+    {
         spriteIndex++;
-        if(spriteIndex >= sprites.Length)
+        if (spriteIndex >= name.Length)
         {
             spriteIndex = 0;
         }
-        spriteRenderer.sprite = sprites[spriteIndex];
+        spriteRenderer.sprite = name[spriteIndex];
+    }
+    public void LoadFirstCharacterImageFrame()
+    {
+        if(birdChar == "Blue") spriteRenderer.sprite = testCharacter[0];
     }
 
     //Collision a Pole
