@@ -727,16 +727,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gravity: -9.8
   strength: 5
+  inGameTextUI: {fileID: 382752874}
+  endGameTextUI: {fileID: 1057874470}
   sprites:
   - {fileID: 21300000, guid: 4b4a57de377138e4e8369d8145550062, type: 3}
   - {fileID: 21300000, guid: 47a1c54c1427e10458e1e21315a00666, type: 3}
   - {fileID: 21300000, guid: 477a76ff29832b2499b9244de7070326, type: 3}
-  inGameTextUI: {fileID: 382752874}
-  endGameTextUI: {fileID: 1057874470}
-  testCharacter:
+  blueBird:
   - {fileID: 21300000, guid: 4dd317f6b25b08645b89d121a148b67c, type: 3}
-  - {fileID: 21300000, guid: 6c19da0082ace7040bb9a208217bc269, type: 3}
-  - {fileID: 21300000, guid: 2e51e159e3b4e3841b86af547ff58152, type: 3}
+  - {fileID: 21300000, guid: 153a6ca5094770c47aa19b3c7286d431, type: 3}
+  - {fileID: 21300000, guid: deeb16b1ee011f74bba2fb1c38a89164, type: 3}
+  greenBird:
+  - {fileID: 21300000, guid: 463a20ae2150909468c7bb7e837dee78, type: 3}
+  - {fileID: 21300000, guid: 89c75afaf94ee1c4fa6d672702841dda, type: 3}
+  - {fileID: 21300000, guid: 4a68d7df25416d947a50e2cfef8f5e7c, type: 3}
+  redBird:
+  - {fileID: 21300000, guid: f3e1c85cf1907dc4fa6a28c121a33da1, type: 3}
+  - {fileID: 21300000, guid: 088cd0a7b4b43b34599e0b30508204ea, type: 3}
+  - {fileID: 21300000, guid: e20fd34efe11e504fa6d14127041f142, type: 3}
 --- !u!1 &1057874466
 GameObject:
   m_ObjectHideFlags: 0

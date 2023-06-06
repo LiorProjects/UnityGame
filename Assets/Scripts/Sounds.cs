@@ -18,4 +18,9 @@ public class Sounds : MonoBehaviour
     {
         sound[2].Play();
     }
+    //Shop sounds
+    public void clickSound()
+    {
+        sound[0].Play();
+    }
 }

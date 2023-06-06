@@ -14,14 +14,16 @@ public class Player : MonoBehaviour
     private int playerCoins = 0;
     private Vector3 direction;
     private SpriteRenderer spriteRenderer;
-    public Sprite[] sprites;
-    private Sounds playSound;
     public InGameTextUI inGameTextUI;
     public EndGameTextUI endGameTextUI;
+    private Sounds playSound;
     private Camera gameCamera;
+    public Sprite[] sprites;
 
-    [SerializeField] private Sprite[] testCharacter;
-    private String birdChar;
+    [SerializeField] private Sprite[] blueBird;
+    [SerializeField] private Sprite[] greenBird;
+    [SerializeField] private Sprite[] redBird;
+    private string birdColor;
 
     private void Awake()
     {
@@ -32,13 +34,9 @@ public class Player : MonoBehaviour
     {
         gameCamera = Camera.main;
         playSound = FindObjectOfType<Sounds>();
+        birdColor = PlayerPrefs.GetString("birdColor");
         InvokeRepeating(nameof(AnimateSprite), 0.15f, 0.15f);
-        birdChar = PlayerPrefs.GetString("Blue_Bird");
-        LoadFirstCharacterImageFrame();
-        //if (myVal == "Blue")
-        //{
-        //    LoadCharacter();//YOU ARE HERE you can use myval2 = myval
-        //}
+        LoadFirstFrameOfTheImage();
     }
     // Update is called once per frame
     private void Update()
@@ -65,7 +63,7 @@ public class Player : MonoBehaviour
         { 
             transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
         }
-        // Check if the player has touched the top of the screen
+        // Check if the player has touched the top and the bottom of the screen
         Vector3 screenPosition = gameCamera.WorldToScreenPoint(transform.position);
         if(screenPosition.y < 0 || screenPosition.y > Screen.height)
         {
@@ -75,22 +73,25 @@ public class Player : MonoBehaviour
     //used in Start()
     private void AnimateSprite()
     {
-        if(birdChar == "Blue")
+        if(birdColor == "Blue")
         {
-            LoadCharacter(testCharacter);
+            LoadCharacter(blueBird);
+        }
+        else if(birdColor == "Green")
+        {
+            LoadCharacter(greenBird);
+        }
+        else if(birdColor == "Red")
+        {
+            LoadCharacter(redBird);
         }
         else
         {
-            spriteIndex++;
-            if(spriteIndex >= sprites.Length)
-            {
-                spriteIndex = 0;
-            }
-            spriteRenderer.sprite = sprites[spriteIndex];
+            LoadCharacter(sprites);
         }
     }
 
-    public void LoadCharacter(Sprite[] name)
+    private void LoadCharacter(Sprite[] name)
     {
         spriteIndex++;
         if (spriteIndex >= name.Length)
@@ -99,9 +100,11 @@ public class Player : MonoBehaviour
         }
         spriteRenderer.sprite = name[spriteIndex];
     }
-    public void LoadFirstCharacterImageFrame()
+    private void LoadFirstFrameOfTheImage()
     {
-        if(birdChar == "Blue") spriteRenderer.sprite = testCharacter[0];
+        if(birdColor == "Blue") spriteRenderer.sprite = blueBird[0];
+        else if(birdColor == "Green") spriteRenderer.sprite = greenBird[0];
+        else if(birdColor == "Red") spriteRenderer.sprite = redBird[0];
     }
 
     //Collision a Pole
@@ -130,7 +133,7 @@ public class Player : MonoBehaviour
         }
     }
     //End the current game
-    void pauseAndEndGame()
+    private void pauseAndEndGame()
     {
         Time.timeScale = 0f;
         endGameTextUI.displayEndGameScreen();
