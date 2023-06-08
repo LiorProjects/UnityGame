@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.U2D;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -32,6 +31,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        Application.targetFrameRate = 120;
         Time.timeScale = 1f;
         gameCamera = Camera.main;
         playSound = FindObjectOfType<Sounds>();
