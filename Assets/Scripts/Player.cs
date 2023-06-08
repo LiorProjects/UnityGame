@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1f;
         gameCamera = Camera.main;
         playSound = FindObjectOfType<Sounds>();
         birdColor = PlayerPrefs.GetString("birdColor");

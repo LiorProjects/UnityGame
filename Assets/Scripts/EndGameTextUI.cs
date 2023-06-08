@@ -24,12 +24,10 @@ public class EndGameTextUI : MonoBehaviour
     void play_again()
     {
         SceneManager.LoadScene("BirdJumper");
-        Time.timeScale = 1.0f;
     }
     void main_menu()
     {
         SceneManager.LoadScene("MainMenu");
-        Time.timeScale = 1.0f;
     }
     public void displayEndGameScreen()
     {

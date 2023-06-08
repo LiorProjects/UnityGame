@@ -7,7 +7,7 @@ public class MoveBackgroud : MonoBehaviour
 {
     // Start is called before the first frame update
     private MeshRenderer mesh;
-    private float speed = 0.2f;
+    private float speed = 0.1f;
     void Awake()
     {
         mesh = GetComponent<MeshRenderer>();
