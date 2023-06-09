@@ -11,11 +11,14 @@ public class ShopMenu : MonoBehaviour
     private Button equipGreenBird;
     private Button equipRedBird;
     private Sounds playSound;
+    private Label coins;
     // Start is called before the first frame update
     void Start()
     {
         playSound = FindObjectOfType<Sounds>();
         var root = GetComponent<UIDocument>().rootVisualElement;
+        coins = root.Q<Label>("coins");
+        coins.text = "Coins: " + PlayerPrefs.GetInt("Coins");
         backBtn = root.Q<Button>("back-btn");
         equipBlueBird = root.Q<Button>("blue-bird-buy-btn");
         equipGreenBird = root.Q<Button>("green-bird-buy-btn");

@@ -138,5 +138,6 @@ public class Player : MonoBehaviour
     {
         Time.timeScale = 0f;
         endGameTextUI.displayEndGameScreen();
+        PlayerPrefs.SetInt("Coins",playerCoins);
     }
 }
