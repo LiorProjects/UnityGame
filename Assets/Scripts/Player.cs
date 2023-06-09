@@ -64,7 +64,7 @@ public class Player : MonoBehaviour
         { 
             transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
         }
-        // Check if the player has touched the top and the bottom of the screen
+        // Check if the player has touched the top or the bottom of the screen
         Vector3 screenPosition = gameCamera.WorldToScreenPoint(transform.position);
         if(screenPosition.y < 0 || screenPosition.y > Screen.height)
         {
@@ -139,5 +139,6 @@ public class Player : MonoBehaviour
         Time.timeScale = 0f;
         endGameTextUI.displayEndGameScreen();
         PlayerPrefs.SetInt("Coins",playerCoins);
+        //add DB query
     }
 }
