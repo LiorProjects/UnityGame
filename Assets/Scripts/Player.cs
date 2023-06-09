@@ -138,7 +138,7 @@ public class Player : MonoBehaviour
     {
         Time.timeScale = 0f;
         endGameTextUI.displayEndGameScreen();
-        PlayerPrefs.SetInt("Coins",playerCoins);//testsd
+        PlayerPrefs.SetInt("Coins",playerCoins);//test
         //add DB query
     }
 }
