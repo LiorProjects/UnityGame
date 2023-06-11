@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log(PlayerPrefs.GetInt("Coins"));
         Application.targetFrameRate = 120;
         Time.timeScale = 1f;
         gameCamera = Camera.main;
@@ -66,9 +67,12 @@ public class Player : MonoBehaviour
         }
         // Check if the player has touched the top or the bottom of the screen
         Vector3 screenPosition = gameCamera.WorldToScreenPoint(transform.position);
-        if(screenPosition.y < 0 || screenPosition.y > Screen.height)
+        if(Time.timeScale != 0f)//Fix the duplicated coins after lose
         {
-            pauseAndEndGame();
+            if(screenPosition.y < 0 || screenPosition.y > Screen.height)
+            {
+                pauseAndEndGame();
+            }
         }
     }
     //used in Start()
@@ -131,6 +135,7 @@ public class Player : MonoBehaviour
             playSound.coinSound();
             inGameTextUI.coinsText(++playerCoins);
             Destroy(collision.gameObject);
+            Debug.Log(PlayerPrefs.GetInt("Coins"));
         }
     }
     //End the current game
