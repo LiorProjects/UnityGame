@@ -7,10 +7,9 @@ using System;
 public class Notifications : MonoBehaviour
 {
     // Start is called before the first frame update
-    private bool firstTimeEnter = false;
     void Start()
     {
-        if(firstTimeEnter == false)
+        if(NotificationManager.hasShownNotification == false)
         {
             //Create the profile for the notification.
             AndroidNotificationChannel notificationChannel = new AndroidNotificationChannel()
@@ -29,7 +28,7 @@ public class Notifications : MonoBehaviour
             notification.SmallIcon = "icon_small";
             notification.LargeIcon = "icon_large";
             notification.ShowTimestamp = true;
-            notification.FireTime = System.DateTime.Now.AddSeconds(1);
+            notification.FireTime = System.DateTime.Now.AddSeconds(2);
         
             //Send the notification to user.
             var identifier = AndroidNotificationCenter.SendNotification(notification, "first_test");
@@ -39,7 +38,7 @@ public class Notifications : MonoBehaviour
                 AndroidNotificationCenter.CancelAllNotifications();
                 AndroidNotificationCenter.SendNotification(notification, "first_test");
             }
-            firstTimeEnter = true;
+            NotificationManager.hasShownNotification = true;
         }
     }
 }
