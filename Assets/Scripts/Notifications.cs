@@ -10,35 +10,33 @@ public class Notifications : MonoBehaviour
     void Start()
     {
         if(NotificationManager.hasShownNotification == false)
-        {
-            //Create the profile for the notification.
-            AndroidNotificationChannel notificationChannel = new AndroidNotificationChannel()
-            {
-                Id = "first_test",
-                Name = "default",
-                Importance = Importance.High,
-                Description = "myTest",
-            };
-            AndroidNotificationCenter.RegisterNotificationChannel(notificationChannel);
+            sendNotification("Welcome", "Welcome the user to the game", "BirdJumper", "Welcome Back!", "icon_small", "icon_large", DateTime.Now.AddSeconds(2));
+        NotificationManager.hasShownNotification = true;
+    }
 
-            //Create custom notification.
-            AndroidNotification notification = new AndroidNotification();
-            notification.Title = "BirdJumper";
-            notification.Text = "Welcome back!";
-            notification.SmallIcon = "icon_small";
-            notification.LargeIcon = "icon_large";
-            notification.ShowTimestamp = true;
-            notification.FireTime = System.DateTime.Now.AddSeconds(2);
-        
-            //Send the notification to user.
-            var identifier = AndroidNotificationCenter.SendNotification(notification, "first_test");
-            //Check if there any notifications if yes cancel them and put new notification to prevent duplication.
-            if(AndroidNotificationCenter.CheckScheduledNotificationStatus(identifier) == NotificationStatus.Scheduled)
-            {
-                AndroidNotificationCenter.CancelAllNotifications();
-                AndroidNotificationCenter.SendNotification(notification, "first_test");
-            }
-            NotificationManager.hasShownNotification = true;
-        }
+    //Send a custom notification
+    private void sendNotification(string id, string name, string title, string text, string smallIcon, string largeIcon, DateTime fireTime)
+    {
+        //Create the profile for the notification.
+        var notificationChannel = new AndroidNotificationChannel()
+        {
+            Id = id,
+            Name = name,
+            Importance = Importance.High,
+        };
+        AndroidNotificationCenter.RegisterNotificationChannel(notificationChannel);
+
+        //Create the notification.
+        var notification = new AndroidNotification();
+        notification.Title = title;
+        notification.Text = text;
+        notification.SmallIcon = smallIcon;
+        notification.LargeIcon = largeIcon;
+        notification.ShowTimestamp = true;
+        notification.FireTime = fireTime;
+
+        //Send the notification to user.
+        AndroidNotificationCenter.SendNotification(notification, id);
+        NotificationManager.hasShownNotification = true;
     }
 }
