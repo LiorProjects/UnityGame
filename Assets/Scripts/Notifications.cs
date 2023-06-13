@@ -23,6 +23,7 @@ public class Notifications : MonoBehaviour
             Id = id,
             Name = name,
             Importance = Importance.High,
+            Description = "Game notification",
         };
         AndroidNotificationCenter.RegisterNotificationChannel(notificationChannel);
 
