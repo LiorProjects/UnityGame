@@ -31,7 +31,6 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(PlayerPrefs.GetInt("Coins"));
         Application.targetFrameRate = 120;
         Time.timeScale = 1f;
         gameCamera = Camera.main;
@@ -135,7 +134,6 @@ public class Player : MonoBehaviour
             playSound.coinSound();
             inGameTextUI.coinsText(++playerCoins);
             Destroy(collision.gameObject);
-            Debug.Log(PlayerPrefs.GetInt("Coins"));
         }
     }
     //End the current game

@@ -9,9 +9,9 @@ public class Notifications : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(NotificationManager.hasShownNotification == false)
-            sendNotification("Welcome", "Welcome the user to the game", "BirdJumper", "Welcome Back!", "icon_small", "icon_large", DateTime.Now.AddSeconds(2));
-        NotificationManager.hasShownNotification = true;
+        //if(NotificationManager.hasShownNotification == false)
+        //    sendNotification("Welcome", "Welcome the user to the game", "BirdJumper", "Welcome Back!", "icon_small", "icon_large", DateTime.Now.AddSeconds(2));
+        //NotificationManager.hasShownNotification = true;
     }
 
     //Send a custom notification
