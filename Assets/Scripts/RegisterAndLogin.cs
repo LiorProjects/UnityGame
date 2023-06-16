@@ -18,6 +18,8 @@ public class RegisterAndLogin : MonoBehaviour
     private VisualElement login;
     private TextField usernameRegisterField;
     private TextField passwordRegisterField;
+    private TextField usernameLoginField;
+    private TextField passwordLoginField;
     private TextField ageField;
     private Button submitBtn;
     private Button registerLoginBtn;
@@ -43,6 +45,8 @@ public class RegisterAndLogin : MonoBehaviour
 
         usernameRegisterField = root.Q<TextField>("username-register-field");
         passwordRegisterField = root.Q<TextField>("password-register-field");
+        usernameLoginField = root.Q<TextField>("username-login-field");
+        passwordLoginField = root.Q<TextField>("password-login-field");
         ageField = root.Q<TextField>("age-field");
 
         registerLoginBtn = root.Q<Button>("register-login-btn");
@@ -67,16 +71,7 @@ public class RegisterAndLogin : MonoBehaviour
     }
     private void enterGameAfterRegister()
     {
-        //insert new user to DB
-        //client = new MongoClient(MONGO_URI);
-        //db = client.GetDatabase(DATABASE_NAME);
-        //IMongoCollection<User_def> userCollection = db.GetCollection<User_def>("users");
-        //User_def e = new();
-        //e.name = "lior";
-        //e.password = "12345678";
-        //e.age = 29;
-        //userCollection.InsertOne(e);
-        //SceneManager.LoadScene("MainMenu");
+        
         if (usernameRegisterField.text.Length < 2 || usernameRegisterField.text.Length > 32)
         {
             Debug.Log("Username must be between 2 and 32 characters long");
@@ -100,22 +95,51 @@ public class RegisterAndLogin : MonoBehaviour
             e.name = usernameRegisterField.text;
             e.password = passwordRegisterField.text;
             e.age = int.Parse(ageField.text);
+            e.coins_count = 0;
+            e.max_score = 0;
+            e.scores = null;
             userCollection.InsertOne(e);
             SceneManager.LoadScene("MainMenu");
         }
 
     }
-    private void enterGameAfterLogin()
+    //Login
+    //checks if user exists
+    //check if password matches the one in the DB
+    private async void enterGameAfterLogin()
     {
-        //Need DB first
+        //db client
         client = new MongoClient(MONGO_URI);
         db = client.GetDatabase(DATABASE_NAME);
-        IMongoCollection<User_def> mc = db.GetCollection<User_def>("users", null);
-        List<User_def> ul = mc.FindSync(user=>true).ToList();
-        User_def[] ud = ul.ToArray();
-        foreach(User_def u in ud)
+        IMongoCollection<User_def> mongoCollection = db.GetCollection<User_def>("users", null);
+        List<User_def> usersList = mongoCollection.Find(user => true).ToList();
+        User_def[] ud = usersList.ToArray();
+        foreach (User_def u in ud)
         {
-            Debug.Log($"{u.name}");
+            Debug.Log(u.name);
+            //if username matches password, continue to main menu
+            if (u.name == usernameLoginField.text)
+            {
+                Debug.Log("matching usernames");
+                if (u.password == passwordLoginField.text)
+                {
+                    Debug.Log(usernameLoginField.text + " is trying to log in.");
+                    PlayerPrefs.SetString("user_name", usernameLoginField.text);
+                    PlayerPrefs.SetInt("user_coins", u.coins_count);
+                    PlayerPrefs.SetInt("user_max_score", u.max_score);
+                    SceneManager.LoadScene("MainMenu");
+                }
+                else
+                {
+                    Debug.Log(usernameLoginField + " faild to login");
+                }
+
+            }
+            else
+            {
+                Debug.Log(usernameLoginField.text + "faild to login");
+            }
         }
     }
+   
 }

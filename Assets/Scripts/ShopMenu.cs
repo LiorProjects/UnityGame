@@ -19,7 +19,7 @@ public class ShopMenu : MonoBehaviour
         var root = GetComponent<UIDocument>().rootVisualElement;
         playSound = FindObjectOfType<Sounds>();
         playerCoins = root.Q<Label>("coins");
-        playerCoins.text = "Coins: " + PlayerPrefs.GetInt("Coins");
+        playerCoins.text = "Coins: " + PlayerPrefs.GetInt("user_coins");
 
         backBtn = root.Q<Button>("back-btn");
         equipBlueBird = root.Q<Button>("blue-bird-buy-btn");

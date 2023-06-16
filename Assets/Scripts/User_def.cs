@@ -10,8 +10,11 @@ public class User_def
     public string name { set; get; }
     public string password { set; get; }
     public int age { set; get; }
-    
-   
+    public int coins_count {  set; get; }
+    public int max_score { set; get; }
+    public List<Score> scores { set; get; }
+
+
 
     //Possible Methods ...
 }

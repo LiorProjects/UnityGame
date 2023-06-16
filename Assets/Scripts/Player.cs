@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MongoDB.Driver;
+using MongoDB.Bson;
 
 public class Player : MonoBehaviour
 {
@@ -24,6 +26,15 @@ public class Player : MonoBehaviour
     [SerializeField] private Sprite[] redBird;
     private string birdColor;
 
+
+    //db
+    private const string MONGO_URI = "mongodb+srv://liorbuddha:liors1234@cluster0.leplnhi.mongodb.net/?retryWrites=true&w=majority";
+    private const string DATABASE_NAME = "birdDB";
+    private MongoClient client;
+    private IMongoDatabase db;
+    
+    
+    
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -137,11 +148,35 @@ public class Player : MonoBehaviour
         }
     }
     //End the current game
-    private void pauseAndEndGame()
+    //private void pauseAndEndGame()
+    //{
+    //    Time.timeScale = 0f;
+    //    endGameTextUI.displayEndGameScreen();
+    //    PlayerPrefs.SetInt("coins_count",PlayerPrefs.GetInt("coins_count") + playerCoins);
+    //    //add DB query
+    //    client = new MongoClient(MONGO_URI);
+    //    db = client.GetDatabase(DATABASE_NAME);
+    //    IMongoCollection<User_def> userCollection = db.GetCollection<User_def>("users");
+    //    User_def newUser = userCollection.FindAsync<User_def>({ "name" : PlayerPrefs.GetString("user_name")});
+
+
+    //}
+    private async void pauseAndEndGame()
     {
         Time.timeScale = 0f;
         endGameTextUI.displayEndGameScreen();
-        PlayerPrefs.SetInt("Coins",PlayerPrefs.GetInt("Coins") + playerCoins);
-        //add DB query
+
+        int coinsCount = PlayerPrefs.GetInt("coins_count") + playerCoins;
+        PlayerPrefs.SetInt("coins_count", coinsCount);
+
+        // Connect to MongoDB
+        var mongoClient = new MongoClient(MONGO_URI);
+        var database = mongoClient.GetDatabase(DATABASE_NAME);
+        var userCollection = database.GetCollection<User_def>("users");
+
+        // Find and update the user's score
+        var filter = Builders<User_def>.Filter.Eq("name", PlayerPrefs.GetString("user_name"));
+        var update = Builders<User_def>.Update.Set("coins_count", coinsCount);
+        await userCollection.UpdateOneAsync(filter, update);
     }
 }
