@@ -26,10 +26,10 @@ public class RegisterAndLogin : MonoBehaviour
     private User_def user_def;
 
     //mongo
-    private const string MONGO_URI = "mongodb://localhost:27017/";
+    //private const string MONGO_URI = "mongodb://localhost:27017/";
     //private const string MONGO_URI = "mongodb+srv://liorbuddha:liors1234@cluster0.leplnhi.mongodb.net/";
 
-    //private const string MONGO_URI = "mongodb+srv://liorbuddha:liors1234@ac-ojekpeb-shard-00-02.leplnhi.mongodb.net:27017/?retryWrites=true&w=majority";
+    private const string MONGO_URI = "mongodb+srv://liorbuddha:liors1234@cluster0.leplnhi.mongodb.net/?retryWrites=true&w=majority";
     private const string DATABASE_NAME = "birdDB";
     private MongoClient client;
     private IMongoDatabase db;
