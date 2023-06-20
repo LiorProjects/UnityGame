@@ -15,6 +15,7 @@ public class RegisterAndLogin : MonoBehaviour
 {
     // Start is called before the first frame update
     //5
+    //6
     private VisualElement register;
     private VisualElement login;
     private TextField usernameRegisterField;
