@@ -166,14 +166,13 @@ public class Player : MonoBehaviour
         Time.timeScale = 0f;
         endGameTextUI.displayEndGameScreen();
 
-        int coinsCount = PlayerPrefs.GetInt("coins_count") + playerCoins;
-        PlayerPrefs.SetInt("coins_count", coinsCount);
+        int coinsCount = PlayerPrefs.GetInt("user_coins") + playerCoins;
+        PlayerPrefs.SetInt("user_coins", coinsCount);
 
         // Connect to MongoDB
         var mongoClient = new MongoClient(MONGO_URI);
         var database = mongoClient.GetDatabase(DATABASE_NAME);
         var userCollection = database.GetCollection<User_def>("users");
-
         // Find and update the user's score
         var filter = Builders<User_def>.Filter.Eq("name", PlayerPrefs.GetString("user_name"));
         var update = Builders<User_def>.Update.Set("coins_count", coinsCount);
