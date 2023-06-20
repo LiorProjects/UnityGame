@@ -36,9 +36,9 @@ public class RegisterAndLogin : MonoBehaviour
     private MongoClient client;
     private IMongoDatabase db;
 
-
     void Start()
     {
+        openDB();
         var root = GetComponent<UIDocument>().rootVisualElement;
         register = root.Q<VisualElement>("register");
         login = root.Q<VisualElement>("login");
@@ -71,10 +71,26 @@ public class RegisterAndLogin : MonoBehaviour
     }
     private void enterGameAfterRegister()
     {
-        
-        if (usernameRegisterField.text.Length < 2 || usernameRegisterField.text.Length > 32)
+        bool isTaken = false;
+        IMongoCollection<User_def> mongoCollection = db.GetCollection<User_def>("users", null);
+        List<User_def> usersList = mongoCollection.Find(user => true).ToList();
+        User_def[] ud = usersList.ToArray();
+        foreach (User_def u in ud)
         {
-            Debug.Log("Username must be between 2 and 32 characters long");
+            if (u.name == usernameRegisterField.text)
+            { 
+                isTaken = true;
+                break;
+            }
+        }
+        
+        if (usernameRegisterField.text.Length < 2 || usernameRegisterField.text.Length > 32 || isTaken)
+        {
+            if (isTaken)
+                Debug.Log("Username is take try another one");
+            else
+                Debug.Log("Username must be between 2 and 32 characters long");
+
             //Need to check if the user is taken in DB
         }
         else if (passwordRegisterField.text.Length < 8 || passwordRegisterField.text.Length > 32)
@@ -88,8 +104,6 @@ public class RegisterAndLogin : MonoBehaviour
         else
         {
             //insert new user to DB
-            client = new MongoClient(MONGO_URI);
-            db = client.GetDatabase(DATABASE_NAME);
             IMongoCollection<User_def> userCollection = db.GetCollection<User_def>("users");
             User_def e = new();
             e.name = usernameRegisterField.text;
@@ -103,24 +117,30 @@ public class RegisterAndLogin : MonoBehaviour
         }
 
     }
+    private void openDB()
+    {
+        client = new MongoClient(MONGO_URI);
+        db = client.GetDatabase(DATABASE_NAME);
+        IMongoCollection<User_def> mongoCollection = db.GetCollection<User_def>("users", null);
+        List<User_def> usersList = mongoCollection.Find(user => true).ToList();
+        User_def[] ud = usersList.ToArray();
+    }
     //Login
     //checks if user exists
     //check if password matches the one in the DB
     private async void enterGameAfterLogin()
     {
         //db client
-        client = new MongoClient(MONGO_URI);
-        db = client.GetDatabase(DATABASE_NAME);
         IMongoCollection<User_def> mongoCollection = db.GetCollection<User_def>("users", null);
         List<User_def> usersList = mongoCollection.Find(user => true).ToList();
         User_def[] ud = usersList.ToArray();
         foreach (User_def u in ud)
         {
-            Debug.Log(u.name);
+            //Debug.Log(u.name);
             //if username matches password, continue to main menu
             if (u.name == usernameLoginField.text)
             {
-                Debug.Log("matching usernames");
+                //Debug.Log("matching usernames");
                 if (u.password == passwordLoginField.text)
                 {
                     Debug.Log(usernameLoginField.text + " is trying to log in.");
