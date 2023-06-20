@@ -25,20 +25,22 @@ public class RegisterAndLogin : MonoBehaviour
     private Button registerLoginBtn;
     private Button loginBtn;
     private Button backBtn;
-    private User_def user_def;
+    //private User_def user_def;
+    private IMongoDatabase database;
 
-    //mongo
-    //private const string MONGO_URI = "mongodb://localhost:27017/";
-    //private const string MONGO_URI = "mongodb+srv://liorbuddha:liors1234@cluster0.leplnhi.mongodb.net/";
+    ////mongo
+    ////private const string MONGO_URI = "mongodb://localhost:27017/";
+    ////private const string MONGO_URI = "mongodb+srv://liorbuddha:liors1234@cluster0.leplnhi.mongodb.net/";
 
-    private const string MONGO_URI = "mongodb+srv://liorbuddha:liors1234@cluster0.leplnhi.mongodb.net/?retryWrites=true&w=majority";
-    private const string DATABASE_NAME = "birdDB";
-    private MongoClient client;
-    private IMongoDatabase db;
+    //private const string MONGO_URI = "mongodb+srv://liorbuddha:liors1234@cluster0.leplnhi.mongodb.net/?retryWrites=true&w=majority";
+    //private const string DATABASE_NAME = "birdDB";
+    //private MongoClient client;
+    //private IMongoDatabase db;
 
     void Start()
     {
-        openDB();
+        //openDB();
+        database = MongoDBManager.Instance.GetDatabase();
         var root = GetComponent<UIDocument>().rootVisualElement;
         register = root.Q<VisualElement>("register");
         login = root.Q<VisualElement>("login");
@@ -72,7 +74,7 @@ public class RegisterAndLogin : MonoBehaviour
     private void enterGameAfterRegister()
     {
         bool isTaken = false;
-        IMongoCollection<User_def> mongoCollection = db.GetCollection<User_def>("users", null);
+        IMongoCollection<User_def> mongoCollection = database.GetCollection<User_def>("users", null);
         List<User_def> usersList = mongoCollection.Find(user => true).ToList();
         User_def[] ud = usersList.ToArray();
         foreach (User_def u in ud)
@@ -104,7 +106,7 @@ public class RegisterAndLogin : MonoBehaviour
         else
         {
             //insert new user to DB
-            IMongoCollection<User_def> userCollection = db.GetCollection<User_def>("users");
+            IMongoCollection<User_def> userCollection = database.GetCollection<User_def>("users");
             User_def e = new();
             e.name = usernameRegisterField.text;
             e.password = passwordRegisterField.text;
@@ -120,21 +122,21 @@ public class RegisterAndLogin : MonoBehaviour
         }
 
     }
-    private void openDB()
-    {
-        client = new MongoClient(MONGO_URI);
-        db = client.GetDatabase(DATABASE_NAME);
-        IMongoCollection<User_def> mongoCollection = db.GetCollection<User_def>("users", null);
-        List<User_def> usersList = mongoCollection.Find(user => true).ToList();
-        User_def[] ud = usersList.ToArray();
-    }
+    //private void openDB()
+    //{
+    //    client = new MongoClient(MONGO_URI);
+    //    db = client.GetDatabase(DATABASE_NAME);
+    //    IMongoCollection<User_def> mongoCollection = db.GetCollection<User_def>("users", null);
+    //    List<User_def> usersList = mongoCollection.Find(user => true).ToList();
+    //    User_def[] ud = usersList.ToArray();
+    //}
     //Login
     //checks if user exists
     //check if password matches the one in the DB
     private async void enterGameAfterLogin()
     {
         //db client
-        IMongoCollection<User_def> mongoCollection = db.GetCollection<User_def>("users", null);
+        IMongoCollection<User_def> mongoCollection = database.GetCollection<User_def>("users", null);
         List<User_def> usersList = mongoCollection.Find(user => true).ToList();
         User_def[] ud = usersList.ToArray();
         foreach (User_def u in ud)

@@ -26,15 +26,17 @@ public class Player : MonoBehaviour
     [SerializeField] private Sprite[] redBird;
     private string birdColor;
 
+    private IMongoDatabase database;
+
 
     //db
-    private const string MONGO_URI = "mongodb+srv://liorbuddha:liors1234@cluster0.leplnhi.mongodb.net/?retryWrites=true&w=majority";
-    private const string DATABASE_NAME = "birdDB";
-    private MongoClient client;
-    private IMongoDatabase db;
-    
-    
-    
+    //private const string MONGO_URI = "mongodb+srv://liorbuddha:liors1234@cluster0.leplnhi.mongodb.net/?retryWrites=true&w=majority";
+    //private const string DATABASE_NAME = "birdDB";
+    //private MongoClient client;
+    //private IMongoDatabase db;
+
+
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -42,6 +44,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        database = MongoDBManager.Instance.GetDatabase();
         Application.targetFrameRate = 120;
         Time.timeScale = 1f;
         gameCamera = Camera.main;
@@ -170,8 +173,8 @@ public class Player : MonoBehaviour
         PlayerPrefs.SetInt("user_coins", coinsCount);
 
         // Connect to MongoDB
-        var mongoClient = new MongoClient(MONGO_URI);
-        var database = mongoClient.GetDatabase(DATABASE_NAME);
+        //var mongoClient = new MongoClient(MONGO_URI);
+        //var database = mongoClient.GetDatabase(DATABASE_NAME);
         var userCollection = database.GetCollection<User_def>("users");
         // Find and update the user's score
         var filter = Builders<User_def>.Filter.Eq("name", PlayerPrefs.GetString("user_name"));
