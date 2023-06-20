@@ -8,6 +8,7 @@ using MongoDB.Bson;
 public class Player : MonoBehaviour
 {
     //variables of a player
+    //f
     public float gravity = -9.8f;
     public float strength = 5f;
     private int spriteIndex;
