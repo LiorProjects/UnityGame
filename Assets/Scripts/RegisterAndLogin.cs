@@ -14,8 +14,6 @@ using System.Text;
 public class RegisterAndLogin : MonoBehaviour
 {
     // Start is called before the first frame update
-    //5
-    //6
     private VisualElement register;
     private VisualElement login;
     private TextField usernameRegisterField;
@@ -37,12 +35,13 @@ public class RegisterAndLogin : MonoBehaviour
     //private const string MONGO_URI = "mongodb+srv://liorbuddha:liors1234@cluster0.leplnhi.mongodb.net/?retryWrites=true&w=majority";
     //private const string DATABASE_NAME = "birdDB";
     //private MongoClient client;
-    //private IMongoDatabase db;
+    //private IMongoDatabase database;
 
     void Start()
     {
         //openDB();
         database = MongoDBManager.Instance.GetDatabase();
+        Debug.Log(database);
         var root = GetComponent<UIDocument>().rootVisualElement;
         register = root.Q<VisualElement>("register");
         login = root.Q<VisualElement>("login");
