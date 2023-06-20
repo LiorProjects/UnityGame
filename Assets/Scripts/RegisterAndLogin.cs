@@ -113,6 +113,9 @@ public class RegisterAndLogin : MonoBehaviour
             e.max_score = 0;
             e.scores = null;
             userCollection.InsertOne(e);
+            PlayerPrefs.SetString("user_name", usernameRegisterField.text);
+            PlayerPrefs.SetInt("user_coins", e.coins_count);
+            PlayerPrefs.SetInt("user_max_score", e.max_score);
             SceneManager.LoadScene("MainMenu");
         }
 
