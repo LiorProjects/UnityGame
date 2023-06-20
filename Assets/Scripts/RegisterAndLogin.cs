@@ -14,6 +14,7 @@ using System.Text;
 public class RegisterAndLogin : MonoBehaviour
 {
     // Start is called before the first frame update
+    //5
     private VisualElement register;
     private VisualElement login;
     private TextField usernameRegisterField;
