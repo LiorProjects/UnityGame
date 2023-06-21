@@ -36,9 +36,7 @@ public class MongoDBManager : MonoBehaviour
     //Connect to MongoDB
     private void Start()
     {
-        IMongoCollection<User_def> mongoCollection = _database.GetCollection<User_def>("users", null);
-        List<User_def> usersList = mongoCollection.Find(user => true).ToList();
-        User_def[] ud = usersList.ToArray();
+       
     }
     //Get the database
     public IMongoDatabase GetDatabase()

@@ -26,6 +26,7 @@ public class RegisterAndLogin : MonoBehaviour
     private Button loginBtn;
     private Button backBtn;
     private IMongoDatabase database;
+    private User_def[] usersListArray;
 
     void Start()
     {
@@ -67,9 +68,9 @@ public class RegisterAndLogin : MonoBehaviour
         bool isTaken = false;
         IMongoCollection<User_def> mongoCollection = database.GetCollection<User_def>("users", null);
         List<User_def> usersList = mongoCollection.Find(user => true).ToList();
-        User_def[] userData = usersList.ToArray();
+        usersListArray = usersList.ToArray();
         //A loop that checks if the username is taken or not
-        foreach (User_def userName in userData)
+        foreach (User_def userName in usersListArray)
         {
             if (userName.name == usernameRegisterField.text)
             { 
@@ -104,7 +105,7 @@ public class RegisterAndLogin : MonoBehaviour
             newUser.age = int.Parse(ageField.text);
             newUser.coins_count = 0;
             newUser.max_score = 0;
-            newUser.scores = new List<int>();
+            newUser.scores = new();
             userCollection.InsertOne(newUser);
             PlayerPrefs.SetString("user_name", usernameRegisterField.text);
             PlayerPrefs.SetInt("user_coins", newUser.coins_count);
@@ -120,7 +121,8 @@ public class RegisterAndLogin : MonoBehaviour
     {
         //db client
         IMongoCollection<User_def> mongoCollection = database.GetCollection<User_def>("users", null);
-        List<User_def> usersList = mongoCollection.Find(user => true).ToList();
+        List<User_def> usersList = mongoCollection.FindSync(user => true).ToList();
+        var ausersList = mongoCollection.Find(FilterDefinition<User_def>.Empty).ToList();
         User_def[] userData = usersList.ToArray();
         foreach (User_def userName in userData)
         {
