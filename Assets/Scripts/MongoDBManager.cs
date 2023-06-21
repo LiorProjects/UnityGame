@@ -46,7 +46,7 @@ public class MongoDBManager : MonoBehaviour
 
     public void OnApplicationQuit()
     {
-        IMongoCollection<User_def> mongoCollection = _database.GetCollection<User_def>("users", null);
+        IMongoCollection<User_def> mongoCollection = this._database.GetCollection<User_def>("users", null);
         List<User_def> usersList = mongoCollection.FindSync(user => true).ToList();
         var filter = Builders<User_def>.Filter.Eq("name", PlayerPrefs.GetString("user_name"));
         var update = Builders<User_def>.Update.Set("status", "Offline");

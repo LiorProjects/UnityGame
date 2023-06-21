@@ -105,6 +105,7 @@ public class RegisterAndLogin : MonoBehaviour
             newUser.age = int.Parse(ageField.text);
             newUser.coins_count = 0;
             newUser.max_score = 0;
+            newUser.status = "Online";
             newUser.scores = new Score[0];
             userCollection.InsertOne(newUser);
             PlayerPrefs.SetString("user_name", usernameRegisterField.text);
