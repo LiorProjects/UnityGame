@@ -43,4 +43,13 @@ public class MongoDBManager : MonoBehaviour
     {
         return _database;
     }
+
+    public void OnApplicationQuit()
+    {
+        IMongoCollection<User_def> mongoCollection = _database.GetCollection<User_def>("users", null);
+        List<User_def> usersList = mongoCollection.FindSync(user => true).ToList();
+        var filter = Builders<User_def>.Filter.Eq("name", PlayerPrefs.GetString("user_name"));
+        var update = Builders<User_def>.Update.Set("status", "Offline");
+        mongoCollection.UpdateOne(filter, update);
+    }
 }

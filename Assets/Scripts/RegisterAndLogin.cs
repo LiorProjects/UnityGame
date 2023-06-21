@@ -105,6 +105,7 @@ public class RegisterAndLogin : MonoBehaviour
             newUser.age = int.Parse(ageField.text);
             newUser.coins_count = 0;
             newUser.max_score = 0;
+            newUser.status = "Online";
             newUser.scores = new();
             userCollection.InsertOne(newUser);
             PlayerPrefs.SetString("user_name", usernameRegisterField.text);
@@ -134,6 +135,9 @@ public class RegisterAndLogin : MonoBehaviour
                 PlayerPrefs.SetInt("user_max_score", userName.max_score);
                 SceneManager.LoadScene("MainMenu");
                 Debug.Log(usernameLoginField.text + "Login");
+                var filter = Builders<User_def>.Filter.Eq("name", PlayerPrefs.GetString("user_name"));
+                var update = Builders<User_def>.Update.Set("status", "Online");
+                mongoCollection.UpdateOne(filter, update);
                 break;
             }
             else
