@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MongoDB.Driver;
 using MongoDB.Bson;
+using System;
 // Model_User Sample
 public class User_def
 {
@@ -13,7 +14,7 @@ public class User_def
     public int coins_count {  set; get; }
     public int max_score { set; get; }
     public string status { set; get; }
-    public List<Score> scores { set; get; }
+    public Score[] scores { set; get; }
 
 
 
