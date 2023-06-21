@@ -9,7 +9,7 @@ public class Score
 {
     public Score(ObjectId id, int score, int coins, DateTime date)
     {
-        _id = id;
+        this._id = id;
         this.score = score;
         this.coins = coins;
         this.date = date;

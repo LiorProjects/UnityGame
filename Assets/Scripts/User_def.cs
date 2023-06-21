@@ -12,6 +12,7 @@ public class User_def
     public int age { set; get; }
     public int coins_count {  set; get; }
     public int max_score { set; get; }
+    public string status { set; get; }
     public List<Score> scores { set; get; }
 
 
