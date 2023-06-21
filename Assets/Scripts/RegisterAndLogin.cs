@@ -25,23 +25,13 @@ public class RegisterAndLogin : MonoBehaviour
     private Button registerLoginBtn;
     private Button loginBtn;
     private Button backBtn;
-    //private User_def user_def;
     private IMongoDatabase database;
-
-    ////mongo
-    ////private const string MONGO_URI = "mongodb://localhost:27017/";
-    ////private const string MONGO_URI = "mongodb+srv://liorbuddha:liors1234@cluster0.leplnhi.mongodb.net/";
-
-    //private const string MONGO_URI = "mongodb+srv://liorbuddha:liors1234@cluster0.leplnhi.mongodb.net/?retryWrites=true&w=majority";
-    //private const string DATABASE_NAME = "birdDB";
-    //private MongoClient client;
-    //private IMongoDatabase database;
 
     void Start()
     {
         //openDB();
         database = MongoDBManager.Instance.GetDatabase();
-        Debug.Log(database);
+        //Debug.Log(database);
         var root = GetComponent<UIDocument>().rootVisualElement;
         register = root.Q<VisualElement>("register");
         login = root.Q<VisualElement>("login");
@@ -77,16 +67,16 @@ public class RegisterAndLogin : MonoBehaviour
         bool isTaken = false;
         IMongoCollection<User_def> mongoCollection = database.GetCollection<User_def>("users", null);
         List<User_def> usersList = mongoCollection.Find(user => true).ToList();
-        User_def[] ud = usersList.ToArray();
-        foreach (User_def u in ud)
+        User_def[] userData = usersList.ToArray();
+        //A loop that checks if the username is taken or not
+        foreach (User_def userName in userData)
         {
-            if (u.name == usernameRegisterField.text)
+            if (userName.name == usernameRegisterField.text)
             { 
                 isTaken = true;
                 break;
             }
         }
-        
         if (usernameRegisterField.text.Length < 2 || usernameRegisterField.text.Length > 32 || isTaken)
         {
             if (isTaken)
@@ -108,58 +98,41 @@ public class RegisterAndLogin : MonoBehaviour
         {
             //insert new user to DB
             IMongoCollection<User_def> userCollection = database.GetCollection<User_def>("users");
-            User_def e = new();
-            e.name = usernameRegisterField.text;
-            e.password = passwordRegisterField.text;
-            e.age = int.Parse(ageField.text);
-            e.coins_count = 0;
-            e.max_score = 0;
-            e.scores = null;
-            userCollection.InsertOne(e);
+            User_def newUser = new();
+            newUser.name = usernameRegisterField.text;
+            newUser.password = passwordRegisterField.text;
+            newUser.age = int.Parse(ageField.text);
+            newUser.coins_count = 0;
+            newUser.max_score = 0;
+            newUser.scores = null;
+            userCollection.InsertOne(newUser);
             PlayerPrefs.SetString("user_name", usernameRegisterField.text);
-            PlayerPrefs.SetInt("user_coins", e.coins_count);
-            PlayerPrefs.SetInt("user_max_score", e.max_score);
+            PlayerPrefs.SetInt("user_coins", newUser.coins_count);
+            PlayerPrefs.SetInt("user_max_score", newUser.max_score);
             SceneManager.LoadScene("MainMenu");
         }
 
     }
-    //private void openDB()
-    //{
-    //    client = new MongoClient(MONGO_URI);
-    //    db = client.GetDatabase(DATABASE_NAME);
-    //    IMongoCollection<User_def> mongoCollection = db.GetCollection<User_def>("users", null);
-    //    List<User_def> usersList = mongoCollection.Find(user => true).ToList();
-    //    User_def[] ud = usersList.ToArray();
-    //}
     //Login
     //checks if user exists
     //check if password matches the one in the DB
-    private async void enterGameAfterLogin()
+    private void enterGameAfterLogin()
     {
         //db client
         IMongoCollection<User_def> mongoCollection = database.GetCollection<User_def>("users", null);
         List<User_def> usersList = mongoCollection.Find(user => true).ToList();
-        User_def[] ud = usersList.ToArray();
-        foreach (User_def u in ud)
+        User_def[] userData = usersList.ToArray();
+        foreach (User_def userName in userData)
         {
-            //Debug.Log(u.name);
             //if username matches password, continue to main menu
-            if (u.name == usernameLoginField.text)
+            if (userName.name == usernameLoginField.text && userName.password == passwordLoginField.text)
             {
-                //Debug.Log("matching usernames");
-                if (u.password == passwordLoginField.text)
-                {
-                    Debug.Log(usernameLoginField.text + " is trying to log in.");
-                    PlayerPrefs.SetString("user_name", usernameLoginField.text);
-                    PlayerPrefs.SetInt("user_coins", u.coins_count);
-                    PlayerPrefs.SetInt("user_max_score", u.max_score);
-                    SceneManager.LoadScene("MainMenu");
-                }
-                else
-                {
-                    Debug.Log(usernameLoginField + " faild to login");
-                }
-
+                PlayerPrefs.SetString("user_name", usernameLoginField.text);
+                PlayerPrefs.SetInt("user_coins", userName.coins_count);
+                PlayerPrefs.SetInt("user_max_score", userName.max_score);
+                SceneManager.LoadScene("MainMenu");
+                Debug.Log(usernameLoginField.text + "Login");
+                break;
             }
             else
             {
@@ -167,5 +140,4 @@ public class RegisterAndLogin : MonoBehaviour
             }
         }
     }
-   
 }

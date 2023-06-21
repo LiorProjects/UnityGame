@@ -29,15 +29,6 @@ public class Player : MonoBehaviour
 
     private IMongoDatabase database;
 
-
-    //db
-    //private const string MONGO_URI = "mongodb+srv://liorbuddha:liors1234@cluster0.leplnhi.mongodb.net/?retryWrites=true&w=majority";
-    //private const string DATABASE_NAME = "birdDB";
-    //private MongoClient client;
-    //private IMongoDatabase db;
-
-
-
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -108,8 +99,7 @@ public class Player : MonoBehaviour
         {
             LoadCharacter(sprites);
         }
-    }
-
+    }//Load player character
     private void LoadCharacter(Sprite[] name)
     {
         spriteIndex++;
@@ -119,13 +109,13 @@ public class Player : MonoBehaviour
         }
         spriteRenderer.sprite = name[spriteIndex];
     }
+    //Load first character image
     private void LoadFirstFrameOfTheImage()
     {
         if(birdColor == "Blue") spriteRenderer.sprite = blueBird[0];
         else if(birdColor == "Green") spriteRenderer.sprite = greenBird[0];
         else if(birdColor == "Red") spriteRenderer.sprite = redBird[0];
     }
-
     //Collision a Pole
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -135,7 +125,6 @@ public class Player : MonoBehaviour
             pauseAndEndGame();
         }
     }
-
     //If the player hit an obstacle
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -152,19 +141,6 @@ public class Player : MonoBehaviour
         }
     }
     //End the current game
-    //private void pauseAndEndGame()
-    //{
-    //    Time.timeScale = 0f;
-    //    endGameTextUI.displayEndGameScreen();
-    //    PlayerPrefs.SetInt("coins_count",PlayerPrefs.GetInt("coins_count") + playerCoins);
-    //    //add DB query
-    //    client = new MongoClient(MONGO_URI);
-    //    db = client.GetDatabase(DATABASE_NAME);
-    //    IMongoCollection<User_def> userCollection = db.GetCollection<User_def>("users");
-    //    User_def newUser = userCollection.FindAsync<User_def>({ "name" : PlayerPrefs.GetString("user_name")});
-
-
-    //}
     private async void pauseAndEndGame()
     {
         Time.timeScale = 0f;
@@ -174,12 +150,16 @@ public class Player : MonoBehaviour
         PlayerPrefs.SetInt("user_coins", coinsCount);
 
         // Connect to MongoDB
-        //var mongoClient = new MongoClient(MONGO_URI);
-        //var database = mongoClient.GetDatabase(DATABASE_NAME);
         var userCollection = database.GetCollection<User_def>("users");
         // Find and update the user's score
         var filter = Builders<User_def>.Filter.Eq("name", PlayerPrefs.GetString("user_name"));
         var update = Builders<User_def>.Update.Set("coins_count", coinsCount);
+        var addScore = Builders<User_def>.Update.Set("max_score", playerScore);
         await userCollection.UpdateOneAsync(filter, update);
+        if(PlayerPrefs.GetInt("user_max_score") < playerScore)
+        {
+            PlayerPrefs.SetInt("user_max_score", playerScore);
+            await userCollection.UpdateOneAsync(filter, addScore);
+        }
     }
 }

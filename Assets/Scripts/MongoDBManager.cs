@@ -21,20 +21,21 @@ public class MongoDBManager : MonoBehaviour
     {
         if (instance != null && instance != this)
         {
-            Destroy(gameObject);
+            Destroy(instance);
         }
         else
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
+        //Create the connection for database
+        _client = new MongoClient(MONGO_URI);
+        if(_database == null)
+            _database = _client.GetDatabase(DATABASE_NAME);
     }
-    //Create the connection for database
+    //Connect to MongoDB
     private void Start()
     {
-        //MongoDB connection
-        _client = new MongoClient(MONGO_URI);
-        _database = _client.GetDatabase(DATABASE_NAME);
         IMongoCollection<User_def> mongoCollection = _database.GetCollection<User_def>("users", null);
         List<User_def> usersList = mongoCollection.Find(user => true).ToList();
         User_def[] ud = usersList.ToArray();
