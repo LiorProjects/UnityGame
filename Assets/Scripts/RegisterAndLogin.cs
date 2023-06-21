@@ -104,7 +104,7 @@ public class RegisterAndLogin : MonoBehaviour
             newUser.age = int.Parse(ageField.text);
             newUser.coins_count = 0;
             newUser.max_score = 0;
-            newUser.scores = null;
+            newUser.scores = new List<int>();
             userCollection.InsertOne(newUser);
             PlayerPrefs.SetString("user_name", usernameRegisterField.text);
             PlayerPrefs.SetInt("user_coins", newUser.coins_count);

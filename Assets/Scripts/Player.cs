@@ -161,5 +161,8 @@ public class Player : MonoBehaviour
             PlayerPrefs.SetInt("user_max_score", playerScore);
             await userCollection.UpdateOneAsync(filter, addScore);
         }
+        //Add new player score to array
+        var addScoreToArray = Builders<User_def>.Update.Push("scores", playerScore);
+        await userCollection.UpdateOneAsync(filter, addScoreToArray);
     }
 }
