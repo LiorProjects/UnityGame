@@ -12,7 +12,7 @@ public class ScoreUI : MonoBehaviour
     private Button backBtn;
     private IMongoDatabase database;
     int scoreSpace = 70;
-    int index = 8;
+    int numbersOfScoresToDisplay = 8;
     void Start()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
@@ -30,11 +30,11 @@ public class ScoreUI : MonoBehaviour
         User_def user_Def = userData[0];
         Score[] userScoreaFromDB = user_Def.scores;
 
-        //Show on the screen player scores
-        for (int i = 0; i < userScoreaFromDB.Length && i < index; i++)
+        //display score list on screen
+        for (int i = 0; i < userScoreaFromDB.Length && i < numbersOfScoresToDisplay; i++)
         {
             //int nextPosition sets the last 8 scores the user has
-            int nextPosition = Math.Max(userScoreaFromDB.Length - index, 0);
+            int nextPosition = Math.Max(userScoreaFromDB.Length - numbersOfScoresToDisplay, 0);
             Label newScore = new Label();
             newScore.text = "Score: " + userScoreaFromDB[i + nextPosition].score + "\tDate: " + userScoreaFromDB[i + nextPosition].date;
             newScore.style.top = 230 + scoreSpace;
