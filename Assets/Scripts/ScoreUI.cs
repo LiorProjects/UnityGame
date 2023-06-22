@@ -12,6 +12,7 @@ public class ScoreUI : MonoBehaviour
     private Button backBtn;
     private IMongoDatabase database;
     int scoreSpace = 70;
+    int index = 8;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,10 +32,12 @@ public class ScoreUI : MonoBehaviour
         Score[] userScoreaFromDB = user_Def.scores;
 
         //Show on the screen player scores
-        for (int i = 0; i < userScoreaFromDB.Length && i < 8; i++)
+        for (int i = 0; i < userScoreaFromDB.Length && i < index; i++)
         {
+            //
+            int nextPosition = Math.Max(userScoreaFromDB.Length - index, 0);
             Label newScore = new Label();
-            newScore.text = "Score: " + userScoreaFromDB[i].score + "\tDate: " + userScoreaFromDB[i].date;
+            newScore.text = "Score: " + userScoreaFromDB[i + nextPosition].score + "\tDate: " + userScoreaFromDB[i + nextPosition].date;
             newScore.style.top = 230 + scoreSpace;
             newScore.AddToClassList("Scores");
             parentElement.Add(newScore);
