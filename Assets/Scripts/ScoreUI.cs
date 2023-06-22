@@ -11,15 +11,17 @@ public class ScoreUI : MonoBehaviour
     private Score[] userScores;
     private Button backBtn;
     private IMongoDatabase database;
+    private Label playerTextScore;
     private void Awake()
     {
        
     }
     // Start is called before the first frame update
-    async void Start()
+    void Start()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
         backBtn = root.Q<Button>("back-btn");
+        playerTextScore = root.Q<Label>("playe-text-score");
         this.database = MongoDBManager.Instance.GetDatabase();
         backBtn.clicked += backToMenu;
         // Connect to MongoDB
