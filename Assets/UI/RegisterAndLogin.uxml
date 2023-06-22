@@ -16,4 +16,5 @@
         <ui:Button text="Register&#10;new account" display-tooltip-when-elided="true" name="back-login-btn" class="play-btn-style" style="margin-bottom: 0; margin-top: 0; margin-left: auto; margin-right: auto; top: 44%; width: 11%; height: 8%; font-size: 30px; left: auto; right: 0; flex-wrap: nowrap; flex-direction: row-reverse; white-space: nowrap;" />
         <ui:Button text="Login" display-tooltip-when-elided="true" name="login-btn" class="play-btn-style" style="margin-bottom: 0; margin-top: 0; margin-left: auto; margin-right: auto; top: 25%; width: 11%; height: 8%; font-size: 30px; left: 0; right: auto; flex-wrap: nowrap; flex-direction: column; bottom: auto;" />
     </ui:VisualElement>
+    <ui:Button text="Play without login" display-tooltip-when-elided="true" name="play-without-login" style="position: absolute; margin-left: auto; margin-right: auto; margin-top: auto; margin-bottom: auto; width: 12%; font-size: 24px; left: 32%; top: 25%;" />
 </ui:UXML>

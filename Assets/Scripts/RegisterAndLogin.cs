@@ -24,6 +24,7 @@ public class RegisterAndLogin : MonoBehaviour
     private Button registerLoginBtn;
     private Button loginBtn;
     private Button backBtn;
+    private Button playWithoutLogin;
     private IMongoDatabase database;
     private User_def[] usersListArray;
 
@@ -44,11 +45,13 @@ public class RegisterAndLogin : MonoBehaviour
         loginBtn = root.Q<Button>("login-btn");
         backBtn = root.Q<Button>("back-login-btn");
         submitBtn = root.Q<Button>("submit-btn");
+        playWithoutLogin = root.Q<Button>("play-without-login");
 
         submitBtn.clicked += enterGameAfterRegister;
         loginBtn.clicked += enterGameAfterLogin;
         registerLoginBtn.clicked += toLoginMenu;
         backBtn.clicked += backToRegister;
+        playWithoutLogin.clicked += toMainMenu;
     }
     private void toLoginMenu()
     {
@@ -163,5 +166,9 @@ public class RegisterAndLogin : MonoBehaviour
                 }
             }
         }
+    }
+    void toMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
