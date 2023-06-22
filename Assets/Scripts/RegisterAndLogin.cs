@@ -139,6 +139,14 @@ public class RegisterAndLogin : MonoBehaviour
                 //if username matches password, continue to main menu
                 if (userName.name == usernameLoginField.text && userName.password == passwordLoginField.text)
                 {
+                    //Checks if the user already in game
+                    var filter1 = Builders<User_def>.Filter.Eq("name", usernameLoginField.text) & Builders<User_def>.Filter.Eq("status", "Online");
+                    var user = mongoCollection.Find(filter1).FirstOrDefault();
+                    if (user != null)
+                    {
+                        Debug.Log("This user already in game");
+                        break;
+                    }
                     PlayerPrefs.SetString("user_name", usernameLoginField.text);
                     PlayerPrefs.SetInt("user_coins", userName.coins_count);
                     PlayerPrefs.SetInt("user_max_score", userName.max_score);
