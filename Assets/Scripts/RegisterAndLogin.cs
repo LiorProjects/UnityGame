@@ -26,6 +26,7 @@ public class RegisterAndLogin : MonoBehaviour
     private Button backBtn;
     private IMongoDatabase database;
     private User_def[] usersListArray;
+    private MongoDBManager mongoManager = new();
 
     void Start()
     {
@@ -60,6 +61,7 @@ public class RegisterAndLogin : MonoBehaviour
         register.style.display = DisplayStyle.Flex;
         login.style.display = DisplayStyle.None;
     }
+    
     private void enterGameAfterRegister()
     {
         //Checks if the user has internet
@@ -74,6 +76,7 @@ public class RegisterAndLogin : MonoBehaviour
             List<User_def> usersList = mongoCollection.Find(user => true).ToList();
             usersListArray = usersList.ToArray();
             //A loop that checks if the username is taken or not
+
             foreach (User_def userName in usersListArray)
             {
                 if (userName.name == usernameRegisterField.text)
