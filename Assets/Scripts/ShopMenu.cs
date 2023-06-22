@@ -12,7 +12,7 @@ public class ShopMenu : MonoBehaviour
     private Button equipRedBird;
     private Sounds playSound;
     private Label playerCoins;
-    // Start is called before the first frame update
+    //Display all birds in shop
     void Start()
     {
         Debug.Log(PlayerPrefs.GetInt("Coins"));

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Sounds : MonoBehaviour
 {
+    //Array of sounds
     public AudioSource[] sound;
 
     public void jumpSound()

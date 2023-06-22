@@ -13,7 +13,7 @@ using System.Text;
 
 public class RegisterAndLogin : MonoBehaviour
 {
-    // Start is called before the first frame update
+    //variables
     private VisualElement register;
     private VisualElement login;
     private TextField usernameRegisterField;
@@ -30,9 +30,7 @@ public class RegisterAndLogin : MonoBehaviour
 
     void Start()
     {
-        //openDB();
         database = MongoDBManager.Instance.GetDatabase();
-        //Debug.Log(database);
         var root = GetComponent<UIDocument>().rootVisualElement;
         register = root.Q<VisualElement>("register");
         login = root.Q<VisualElement>("login");
@@ -91,8 +89,6 @@ public class RegisterAndLogin : MonoBehaviour
                     Debug.Log("Username is take try another one");
                 else
                     Debug.Log("Username must be between 2 and 32 characters long");
-
-                //Need to check if the user is taken in DB
             }
             else if (passwordRegisterField.text.Length < 8 || passwordRegisterField.text.Length > 32)
             {
@@ -123,7 +119,6 @@ public class RegisterAndLogin : MonoBehaviour
         }
     }
     //Login
-    //checks if user exists
     //check if password matches the one in the DB
     private void enterGameAfterLogin()
     {

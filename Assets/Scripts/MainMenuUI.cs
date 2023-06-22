@@ -10,6 +10,7 @@ public class MainMenuUI : MonoBehaviour
     private Button shopBtn;
     private Button scoreBtn;
     private Button leaderboardBtn;
+    //Display buttons on screen
     void Start()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;

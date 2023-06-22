@@ -27,6 +27,7 @@ public class SpawnPipes : MonoBehaviour
     {
         CancelInvoke(nameof(Spawn));
     }
+    //Spawn the pipes
     private void Spawn()
     {
         //Creates new pipe in a random position

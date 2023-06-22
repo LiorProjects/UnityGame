@@ -9,10 +9,10 @@ public class EndGameTextUI : MonoBehaviour
     private Button playAgain;
     private Button mainMenu;
     private VisualElement endGameScreen;
-    // Start is called before the first frame update
     void Start()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
+        //Buttons
         playAgain = root.Q<Button>("play-again-btn");
         mainMenu = root.Q<Button>("main-menu-btn");
         endGameScreen = root.Q<VisualElement>("display-end-screen");
@@ -29,6 +29,7 @@ public class EndGameTextUI : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
+    //Display a box with options
     public void displayEndGameScreen()
     {
         endGameScreen.style.display = DisplayStyle.Flex;

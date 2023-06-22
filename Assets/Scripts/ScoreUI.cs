@@ -13,7 +13,6 @@ public class ScoreUI : MonoBehaviour
     private IMongoDatabase database;
     int scoreSpace = 70;
     int index = 8;
-    // Start is called before the first frame update
     void Start()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
@@ -34,7 +33,7 @@ public class ScoreUI : MonoBehaviour
         //Show on the screen player scores
         for (int i = 0; i < userScoreaFromDB.Length && i < index; i++)
         {
-            //
+            //int nextPosition sets the last 8 scores the user has
             int nextPosition = Math.Max(userScoreaFromDB.Length - index, 0);
             Label newScore = new Label();
             newScore.text = "Score: " + userScoreaFromDB[i + nextPosition].score + "\tDate: " + userScoreaFromDB[i + nextPosition].date;

@@ -7,13 +7,13 @@ using UnityEngine.UIElements;
 public class LeaderboardUI : MonoBehaviour
 {
     private Button backBtn;
-    // Start is called before the first frame update
     void Start()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
         backBtn = root.Q<Button>("back-btn");
         backBtn.clicked += backToMenu;
     }
+    //Back to main menu
     private void backToMenu()
     {
         SceneManager.LoadScene("MainMenu");

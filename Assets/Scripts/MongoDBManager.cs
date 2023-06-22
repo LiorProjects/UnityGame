@@ -43,7 +43,7 @@ public class MongoDBManager : MonoBehaviour
     {
         return _database;
     }
-
+    //Set the player to Offline status when the game is closed
     public void OnApplicationQuit()
     {
         IMongoCollection<User_def> mongoCollection = this._database.GetCollection<User_def>("users", null);
