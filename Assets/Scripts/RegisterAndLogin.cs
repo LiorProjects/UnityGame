@@ -8,8 +8,7 @@ using MongoDB.Driver;
 using UnityEngine.Networking;
 using MongoDB.Bson;
 using System.Text;
-
-
+using System;
 
 public class RegisterAndLogin : MonoBehaviour
 {
@@ -155,6 +154,7 @@ public class RegisterAndLogin : MonoBehaviour
                     var filter = Builders<User_def>.Filter.Eq("name", PlayerPrefs.GetString("user_name"));
                     var update = Builders<User_def>.Update.Set("status", "Online");
                     mongoCollection.UpdateOne(filter, update);
+                    Notifications.sendNotification("Welcome", "Welcome the user to the game", "BirdJumper", "Welcome Back " + usernameLoginField + "!", "icon_small", "icon_large", DateTime.Now.AddSeconds(2));
                     break;
                 }
                 else

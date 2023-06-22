@@ -6,16 +6,8 @@ using System;
 
 public class Notifications : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        //if(NotificationManager.hasShownNotification == false)
-        //    sendNotification("Welcome", "Welcome the user to the game", "BirdJumper", "Welcome Back!", "icon_small", "icon_large", DateTime.Now.AddSeconds(2));
-        //NotificationManager.hasShownNotification = true;
-    }
-
     //Send a custom notification
-    private void sendNotification(string id, string name, string title, string text, string smallIcon, string largeIcon, DateTime fireTime)
+    public static void sendNotification(string id, string name, string title, string text, string smallIcon, string largeIcon, DateTime fireTime)
     {
         //Create the profile for the notification.
         var notificationChannel = new AndroidNotificationChannel()
