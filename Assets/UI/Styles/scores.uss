@@ -1,0 +1,15 @@
+.Scores {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 36px;
+    text-shadow: 0 0 0 rgb(0, 0, 0);
+    -unity-text-outline-color: rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
+    width: auto;
+    top: 27%;
+    right: auto;
+    left: 35%;
+}
