@@ -35,7 +35,10 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        database = MongoDBManager.Instance.GetDatabase();
+        if (PlayerPrefs.GetString("user_name") != null)
+        {
+            database = MongoDBManager.Instance.GetDatabase();
+        }
         Application.targetFrameRate = 120;
         Time.timeScale = 1f;
         gameCamera = Camera.main;
@@ -149,25 +152,28 @@ public class Player : MonoBehaviour
         PlayerPrefs.SetInt("user_coins", coinsCount);
 
         // Connect to MongoDB
-        var userCollection = database.GetCollection<User_def>("users");
-        // Find and update the user's score
-        var filter = Builders<User_def>.Filter.Eq("name", PlayerPrefs.GetString("user_name"));
-        var update = Builders<User_def>.Update.Set("coins_count", coinsCount);
-        var addScore = Builders<User_def>.Update.Set("max_score", playerScore);
-        await userCollection.UpdateOneAsync(filter, update);
-        if(PlayerPrefs.GetInt("user_max_score") < playerScore)
+        if (PlayerPrefs.GetString("user_name") != null)
         {
-            PlayerPrefs.SetInt("user_max_score", playerScore);
-            await userCollection.UpdateOneAsync(filter, addScore);
+            var userCollection = database.GetCollection<User_def>("users");
+            // Find and update the user's score
+            var filter = Builders<User_def>.Filter.Eq("name", PlayerPrefs.GetString("user_name"));
+            var update = Builders<User_def>.Update.Set("coins_count", coinsCount);
+            var addScore = Builders<User_def>.Update.Set("max_score", playerScore);
+            await userCollection.UpdateOneAsync(filter, update);
+            if (PlayerPrefs.GetInt("user_max_score") < playerScore)
+            {
+                PlayerPrefs.SetInt("user_max_score", playerScore);
+                await userCollection.UpdateOneAsync(filter, addScore);
+            }
+            //Add new player score to array
+
+            Score score = new Score(new ObjectId(), playerScore, playerCoins, DateTime.Now);
+            //score.score = playerScore;
+            //score.date = DateTime.Now;
+            //score.coins = coinsCount;
+            var addScoreToArray = Builders<User_def>.Update.Push("scores", score);
+            Debug.Log(score.ToString());
+            await userCollection.UpdateOneAsync(filter, addScoreToArray);
         }
-        //Add new player score to array
-       
-        Score score = new Score(new ObjectId(), playerScore, playerCoins, DateTime.Now);
-        //score.score = playerScore;
-        //score.date = DateTime.Now;
-        //score.coins = coinsCount;
-        var addScoreToArray = Builders<User_def>.Update.Push("scores", score);
-        Debug.Log(score.ToString());
-        await userCollection.UpdateOneAsync(filter, addScoreToArray);
     }
 }
