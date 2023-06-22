@@ -172,6 +172,7 @@ public class RegisterAndLogin : MonoBehaviour
     }
     void toMainMenu()
     {
+        PlayerPrefs.SetString("user_name", null);
         SceneManager.LoadScene("MainMenu");
     }
 }
