@@ -27,7 +27,7 @@ public class RegisterAndLogin : MonoBehaviour
     private Button playWithoutLogin;
     private IMongoDatabase database;
     private User_def[] usersListArray;
-    private MongoDBManager mongoManager = new();
+    private MongoDBManager mongoManager;
 
     void Start()
     {
@@ -35,7 +35,7 @@ public class RegisterAndLogin : MonoBehaviour
         var root = GetComponent<UIDocument>().rootVisualElement;
         register = root.Q<VisualElement>("register");
         login = root.Q<VisualElement>("login");
-
+        mongoManager = gameObject.AddComponent<MongoDBManager>();
         usernameRegisterField = root.Q<TextField>("username-register-field");
         passwordRegisterField = root.Q<TextField>("password-register-field");
         usernameLoginField = root.Q<TextField>("username-login-field");
@@ -75,9 +75,7 @@ public class RegisterAndLogin : MonoBehaviour
         else
         {
             bool isTaken = false;
-            IMongoCollection<User_def> mongoCollection = database.GetCollection<User_def>("users", null);
-            List<User_def> usersList = mongoCollection.Find(user => true).ToList();
-            usersListArray = usersList.ToArray();
+            usersListArray = mongoManager.getAllUsers();
             //A loop that checks if the username is taken or not
 
             foreach (User_def userName in usersListArray)
@@ -106,7 +104,6 @@ public class RegisterAndLogin : MonoBehaviour
             else
             {
                 //insert new user to DB
-                IMongoCollection<User_def> userCollection = database.GetCollection<User_def>("users");
                 User_def newUser = new();
                 newUser.name = usernameRegisterField.text;
                 newUser.password = passwordRegisterField.text;
@@ -115,7 +112,7 @@ public class RegisterAndLogin : MonoBehaviour
                 newUser.max_score = 0;
                 newUser.status = "Online";
                 newUser.scores = new Score[0];
-                userCollection.InsertOne(newUser);
+                mongoManager.insertNewUserToDB(newUser);
                 PlayerPrefs.SetString("user_name", usernameRegisterField.text);
                 PlayerPrefs.SetInt("user_coins", newUser.coins_count);
                 PlayerPrefs.SetInt("user_max_score", newUser.max_score);
@@ -134,11 +131,10 @@ public class RegisterAndLogin : MonoBehaviour
         }
         else
         {
+            //MOVE TO DB_MANAGER
             //db client
             IMongoCollection<User_def> mongoCollection = database.GetCollection<User_def>("users", null);
-            List<User_def> usersList = mongoCollection.FindSync(user => true).ToList();
-            var ausersList = mongoCollection.Find(FilterDefinition<User_def>.Empty).ToList();
-            User_def[] userData = usersList.ToArray();
+            User_def[] userData = mongoManager.getAllUsers();
             foreach (User_def userName in userData)
             {
                 //if username matches password, continue to main menu

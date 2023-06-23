@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MongoDB.Driver;
-using UnityEditor.PackageManager;
 
 public class MongoDBManager : MonoBehaviour
 {
@@ -52,5 +51,16 @@ public class MongoDBManager : MonoBehaviour
         var update = Builders<User_def>.Update.Set("status", "Offline");
         mongoCollection.UpdateOne(filter, update);
     }
-    
+    public User_def[] getAllUsers()
+    {
+        IMongoCollection<User_def> mongoCollection = this._database.GetCollection<User_def>("users", null);
+        List<User_def> usersList = mongoCollection.Find(user => true).ToList();
+        User_def[] ud = usersList.ToArray();
+        return ud;
+    }
+    public void insertNewUserToDB(User_def newUser)
+    {
+        IMongoCollection<User_def> userCollection = this._database.GetCollection<User_def>("users");
+        userCollection.InsertOne(newUser);
+    }
 }

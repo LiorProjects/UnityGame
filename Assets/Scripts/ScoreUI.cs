@@ -19,6 +19,7 @@ public class ScoreUI : MonoBehaviour
         var parentElement = root.Q<VisualElement>("parent-element");
         backBtn = root.Q<Button>("back-btn");
         backBtn.clicked += backToMenu;
+        //no user loged in
         if (PlayerPrefs.GetString("user_name") != null)
         {
             // Connect to MongoDB
@@ -28,7 +29,6 @@ public class ScoreUI : MonoBehaviour
             List<User_def> usersList = mongoCollection.FindSync(filter).ToList();
             var ausersList = mongoCollection.Find(FilterDefinition<User_def>.Empty).ToList();
             User_def[] userData = usersList.ToArray();
-
             User_def user_Def = userData[0];
             Score[] userScoreaFromDB = user_Def.scores;
 
