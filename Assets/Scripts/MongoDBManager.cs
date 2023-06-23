@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MongoDB.Driver;
-using UnityEditor.PackageManager;
 
 public class MongoDBManager : MonoBehaviour
 {
-    private const string MONGO_URI = "mongodb+srv://liorbuddha:liors1234@cluster0.leplnhi.mongodb.net/?retryWrites=true&w=majority";
+    //private const string MONGO_URI = "mongodb+srv://liorbuddha:liors1234@cluster0.leplnhi.mongodb.net/?retryWrites=true&w=majority";
+    private const string MONGO_URI = "mongodb://liorbuddha:liors1234@ac-ojekpeb-shard-00-00.leplnhi.mongodb.net:27017,ac-ojekpeb-shard-00-01.leplnhi.mongodb.net:27017,ac-ojekpeb-shard-00-02.leplnhi.mongodb.net:27017/?ssl=true&replicaSet=atlas-3zex7x-shard-0&authSource=admin&retryWrites=true&w=majority";
     private const string DATABASE_NAME = "birdDB";
     private static MongoDBManager instance;
     private IMongoClient _client;
