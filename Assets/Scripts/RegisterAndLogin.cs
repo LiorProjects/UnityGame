@@ -168,7 +168,7 @@ public class RegisterAndLogin : MonoBehaviour
     }
     void toMainMenu()
     {
-        PlayerPrefs.SetString("user_name", null);
+        PlayerPrefs.SetString("user_name", "");
         SceneManager.LoadScene("MainMenu");
     }
 }

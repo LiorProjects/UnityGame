@@ -20,7 +20,7 @@ public class ScoreUI : MonoBehaviour
         backBtn = root.Q<Button>("back-btn");
         backBtn.clicked += backToMenu;
         //no user loged in
-        if (PlayerPrefs.GetString("user_name") != null)
+        if (PlayerPrefs.GetString("user_name") != "")
         {
             // Connect to MongoDB
             this.database = MongoDBManager.Instance.GetDatabase();

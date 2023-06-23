@@ -15,7 +15,7 @@ public class ShopMenu : MonoBehaviour
     //Display all birds in shop
     void Start()
     {
-        Debug.Log(PlayerPrefs.GetInt("Coins"));
+        Debug.Log(PlayerPrefs.GetInt("user_coins"));
         var root = GetComponent<UIDocument>().rootVisualElement;
         playSound = FindObjectOfType<Sounds>();
         playerCoins = root.Q<Label>("coins");
@@ -36,7 +36,8 @@ public class ShopMenu : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
     void blueBird()
-    {
+    {   
+        if(PlayerPrefs.g)
         PlayerPrefs.SetString("birdColor", "Blue");
         playSound.clickSound();
     }
