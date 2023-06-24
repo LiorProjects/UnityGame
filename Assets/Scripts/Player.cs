@@ -166,7 +166,7 @@ public class Player : MonoBehaviour
                 await userCollection.UpdateOneAsync(filter, addScore);
             }
             //Add new player score to array
-            Score score = new(playerScore, playerCoins, DateTime.Now);
+            Score score = new(PlayerPrefs.GetString("user_name"),playerScore, playerCoins, DateTime.Now);
             var addScoreToArray = Builders<User_def>.Update.Push("scores", score);
             Debug.Log(score.ToString());
             await userCollection.UpdateOneAsync(filter, addScoreToArray);

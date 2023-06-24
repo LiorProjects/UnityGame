@@ -103,4 +103,35 @@ public class MongoDBManager : MonoBehaviour
         
         
     }
+    //get top scores
+    public Score[] getTopLeaderScores()
+    {
+        User_def[] users = getAllUsers();
+        Score[] scores = new Score[0];
+        for(int i = 0; i < users.Length; i++)
+        {
+            for(int j=0; j < users[i].scores.Length; j++)
+            {
+                scores.Append(users[i].scores[j]);
+            }
+        }
+        for(int i =0; i < scores.Length; i++)
+        {
+            for(int j = 0;j<scores.Length-1; j++)
+            {
+                if (scores[j].score > scores[j + 1].score)
+                {
+                    Score tmp = scores[j];
+                    scores[j] = scores[j + 1];
+                    scores[j+1] = tmp;
+                }
+            }
+        }
+        Score[] orderedByScore = new Score[10];
+        for (int i = 0; i < orderedByScore.Length; i++)
+        {
+            orderedByScore[i] = scores[i + 1 * -1];
+        }
+        return orderedByScore;
+    }
 }
