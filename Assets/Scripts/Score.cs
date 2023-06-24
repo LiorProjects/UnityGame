@@ -7,9 +7,8 @@ using System;
 
 public class Score
 {
-    public Score(ObjectId id, int score, int coins, DateTime date)
+    public Score(int score, int coins, DateTime date)
     {
-        this._id = id;
         this.score = score;
         this.coins = coins;
         this.date = date;
@@ -19,5 +18,6 @@ public class Score
     public int score { set; get; }
     public int coins { set; get; }
     public DateTime date { set; get; }
+    
     
 }

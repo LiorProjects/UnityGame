@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MongoDB.Driver;
+using System.Data.Common;
+using MongoDB.Bson;
+using System;
+using System.Linq;
 
 public class MongoDBManager : MonoBehaviour
 {
@@ -59,9 +63,44 @@ public class MongoDBManager : MonoBehaviour
         User_def[] ud = usersList.ToArray();
         return ud;
     }
+    public User_def getUserByUserName(string user_name)
+    {
+        IMongoCollection<User_def> mongoCollection = this._database.GetCollection<User_def>("users", null); 
+        var filter = Builders<User_def>.Filter.Eq("name", PlayerPrefs.GetString("user_name"));
+        User_def user = mongoCollection.Find(filter).FirstOrDefault();
+        return user;
+    }
+    //add new user to DB
     public void insertNewUserToDB(User_def newUser)
     {
         IMongoCollection<User_def> userCollection = this._database.GetCollection<User_def>("users");
         userCollection.InsertOne(newUser);
+    }
+    //Update user coins
+    public void updateUserCoins(string user_name, int numOfCoins)
+    {
+        IMongoCollection<User_def> mongoCollection = _database.GetCollection<User_def>("users");
+        var filter = Builders<User_def>.Filter.Eq("name", user_name);
+        var update = Builders<User_def>.Update.Set("coins_count", (PlayerPrefs.GetInt("user_coins")-numOfCoins));
+        mongoCollection.UpdateOne(filter, update);
+    }
+    //Add bird to user in DB
+    public void addNewBirdToUser(string user_name, string birdName)
+    {
+        // Find and update the user's birds
+        IMongoCollection<User_def> mongoCollection = _database.GetCollection<User_def>("users");
+        User_def user = getUserByUserName(user_name);
+        var filter = Builders<User_def>.Filter.Eq("name", user.name);
+        string[] user_birds = user.birds ?? (new string[0]);
+        Debug.Log("birds array:");
+        Debug.Log("is bird found in user's birds array?: "+user_birds.Contains(birdName));
+        if(!user_birds.Contains(birdName))
+        {
+            user_birds.Append(birdName);
+            var update = Builders<User_def>.Update.Push("birds", birdName);
+            mongoCollection.UpdateOne(filter, update);
+        }
+        
+        
     }
 }

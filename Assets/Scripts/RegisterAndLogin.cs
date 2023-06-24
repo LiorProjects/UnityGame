@@ -112,6 +112,7 @@ public class RegisterAndLogin : MonoBehaviour
                 newUser.max_score = 0;
                 newUser.status = "Online";
                 newUser.scores = new Score[0];
+                newUser.birds = new string[0];
                 mongoManager.insertNewUserToDB(newUser);
                 PlayerPrefs.SetString("user_name", usernameRegisterField.text);
                 PlayerPrefs.SetInt("user_coins", newUser.coins_count);
@@ -152,23 +153,24 @@ public class RegisterAndLogin : MonoBehaviour
                     PlayerPrefs.SetInt("user_coins", userName.coins_count);
                     PlayerPrefs.SetInt("user_max_score", userName.max_score);
                     SceneManager.LoadScene("MainMenu");
-                    Debug.Log(usernameLoginField.text + "Login");
+                    Debug.Log(usernameLoginField.text + " Login");
                     var filter = Builders<User_def>.Filter.Eq("name", PlayerPrefs.GetString("user_name"));
                     var update = Builders<User_def>.Update.Set("status", "Online");
                     mongoCollection.UpdateOne(filter, update);
                     Notifications.sendNotification("Welcome", "Welcome the user to the game", "BirdJumper", "Welcome Back " + usernameLoginField.text + "!", "icon_small", "icon_large", DateTime.Now.AddSeconds(2));
                     break;
                 }
-                else
-                {
-                    Debug.Log(usernameLoginField.text + "faild to login");
-                }
+                
             }
         }
     }
     void toMainMenu()
     {
+
         PlayerPrefs.SetString("user_name", "");
+        PlayerPrefs.SetInt("user_max_score", 0);
+        PlayerPrefs.SetInt("user_coins", 0);
         SceneManager.LoadScene("MainMenu");
     }
+    
 }

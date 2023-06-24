@@ -15,6 +15,7 @@ public class User_def
     public int max_score { set; get; }
     public string status { set; get; }
     public Score[] scores { set; get; }
+    public string[] birds { set; get; }
 
 
 
