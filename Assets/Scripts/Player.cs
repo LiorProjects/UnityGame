@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
         Time.timeScale = 1f;
         gameCamera = Camera.main;
         playSound = FindObjectOfType<Sounds>();
+        inGameTextUI.maxScoreText(PlayerPrefs.GetInt("user_max_score"));
         birdColor = PlayerPrefs.GetString("birdColor");
         InvokeRepeating(nameof(AnimateSprite), 0.15f, 0.15f);
         LoadFirstFrameOfTheImage();
