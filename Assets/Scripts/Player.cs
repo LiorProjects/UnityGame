@@ -148,22 +148,22 @@ public class Player : MonoBehaviour
     {
         Time.timeScale = 0f;
         endGameTextUI.displayEndGameScreen();
-
+        //set new coins count
         int coinsCount = PlayerPrefs.GetInt("user_coins") + playerCoins;
         PlayerPrefs.SetInt("user_coins", coinsCount);
 
-        // Connect to MongoDB
+        // Connect to MongoDB (only if user is signd up)
         if (PlayerPrefs.GetString("user_name") != null)
         {
             var userCollection = database.GetCollection<User_def>("users");
-            // Find and update the user's score
+            // Find and update the user's score and coins
             var filter = Builders<User_def>.Filter.Eq("name", PlayerPrefs.GetString("user_name"));
             var update = Builders<User_def>.Update.Set("coins_count", coinsCount);
-            var addScore = Builders<User_def>.Update.Set("max_score", playerScore);
             await userCollection.UpdateOneAsync(filter, update);
             if (PlayerPrefs.GetInt("user_max_score") < playerScore)
             {
                 PlayerPrefs.SetInt("user_max_score", playerScore);
+                var addScore = Builders<User_def>.Update.Set("max_score", playerScore);
                 await userCollection.UpdateOneAsync(filter, addScore);
             }
             //Add new player score to array
@@ -171,6 +171,15 @@ public class Player : MonoBehaviour
             var addScoreToArray = Builders<User_def>.Update.Push("scores", score);
             Debug.Log(score.ToString());
             await userCollection.UpdateOneAsync(filter, addScoreToArray);
+        }
+        else
+        {
+            if (PlayerPrefs.GetInt("user_max_score") < playerScore)
+            {
+                PlayerPrefs.SetInt("user_max_score", playerScore);
+            }
+                
+
         }
     }
 }

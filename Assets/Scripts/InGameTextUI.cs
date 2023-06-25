@@ -15,7 +15,7 @@ public class InGameTextUI : MonoBehaviour
         playerScore = root.Q<Label>("player_score");
         playerCoins = root.Q<Label>("player_coins");
         playerMaxScore = root.Q<Label>("player_max_score");
-
+        //
     }
     //Function to display score on screen
     public void scoreText(int score)
