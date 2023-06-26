@@ -5,14 +5,19 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using MongoDB.Driver;
 using MongoDB.Bson;
-
+using System.Diagnostics.Tracing;
 
 public class ShopMenu : MonoBehaviour
 {
     private Button backBtn;
+
+    private Button buyBlueBird;
     private Button equipBlueBird;
+
     private Button equipGreenBird;
+
     private Button equipRedBird;
+
     private Sounds playSound;
     private Label playerCoins;
     private MongoDBManager mongoManager1;
@@ -28,15 +33,32 @@ public class ShopMenu : MonoBehaviour
         this.playerCoins.text = "Coins: " + PlayerPrefs.GetInt("user_coins");
 
         this.backBtn = root.Q<Button>("back-btn");
-        this.equipBlueBird = root.Q<Button>("blue-bird-buy-btn");
         this.equipGreenBird = root.Q<Button>("green-bird-buy-btn");
         this.equipRedBird = root.Q<Button>("red-bird-buy-btn");
 
         backBtn.clicked += backToMenu;
-        equipBlueBird.clicked += blueBird;
         equipGreenBird.clicked += greenBird;
         equipRedBird.clicked += redBird;
+
+        this.equipBlueBird = root.Q<Button>("blue-bird-equip-btn");
+        this.buyBlueBird = root.Q<Button>("blue-bird-buy-btn");
+        buyBlueBird.clicked += blueBird;
+        if (mongoManager1.checkUserBird(PlayerPrefs.GetString("user_name"), "Blue"))
+        {
+            this.buyBlueBird.style.display = DisplayStyle.None;
+            //this.equipBlueBird = root.Q<Button>("blue-bird-equip-btn");
+            this.equipBlueBird.style.display = DisplayStyle.Flex;
+            equipBlueBird.clicked += blueBirdSet;
+        }
+        else
+            Debug.Log("Don't have");
+
         Debug.Log("player coins at start() " + PlayerPrefs.GetInt("user_coins"));
+
+        //if (mongoManager1.checkUserBird(PlayerPrefs.GetString("user_name"), "Blue"))
+        //    Debug.Log("Have bird");
+        //else
+        //    Debug.Log("Don't have");
 
     }
     private void Update()
@@ -59,11 +81,18 @@ public class ShopMenu : MonoBehaviour
             PlayerPrefs.SetString("birdColor", "Blue");
             playSound.clickSound();
             PlayerPrefs.SetInt("user_coins", PlayerPrefs.GetInt("user_coins") - value);
-            mongoManager1.updateUserCoins(PlayerPrefs.GetString("user_name"), value);
+            mongoManager1.updateUserCoins(PlayerPrefs.GetString("user_name"));
             //Add selected bird to DB
             mongoManager1.addNewBirdToUser(PlayerPrefs.GetString("user_name"), "Blue");
+            this.buyBlueBird.style.display = DisplayStyle.None;
+            equipBlueBird.clicked += blueBirdSet;
         }
-        
+
+    }
+    void blueBirdSet()
+    {
+        PlayerPrefs.SetString("birdColor", "Blue");
+        playSound.clickSound();
     }
     void redBird()
     {
@@ -73,7 +102,7 @@ public class ShopMenu : MonoBehaviour
             PlayerPrefs.SetString("birdColor", "Red");
             playSound.clickSound();
             PlayerPrefs.SetInt("user_coins", PlayerPrefs.GetInt("user_coins") - value);
-            this.mongoManager1.updateUserCoins(PlayerPrefs.GetString("user_name"), value);
+            this.mongoManager1.updateUserCoins(PlayerPrefs.GetString("user_name"));
             //Add selected bird to DB
             mongoManager1.addNewBirdToUser(PlayerPrefs.GetString("user_name"), "Red");
         }
@@ -86,7 +115,7 @@ public class ShopMenu : MonoBehaviour
             PlayerPrefs.SetString("birdColor", "Green");
             playSound.clickSound();
             PlayerPrefs.SetInt("user_coins", PlayerPrefs.GetInt("user_coins") - value);
-            this.mongoManager1.updateUserCoins(PlayerPrefs.GetString("user_name"), value);
+            this.mongoManager1.updateUserCoins(PlayerPrefs.GetString("user_name"));
             //Add selected bird to DB
             mongoManager1.addNewBirdToUser(PlayerPrefs.GetString("user_name"), "Green");
         }
