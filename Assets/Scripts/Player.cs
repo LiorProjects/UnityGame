@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     private Sounds playSound;
     private Camera gameCamera;
     public Sprite[] sprites;
+    private MongoDBManager mongoManager1;
 
     [SerializeField] private Sprite[] blueBird;
     [SerializeField] private Sprite[] greenBird;
@@ -39,6 +40,7 @@ public class Player : MonoBehaviour
         {
             database = MongoDBManager.Instance.GetDatabase();
         }
+        mongoManager1 = gameObject.AddComponent<MongoDBManager>();
         Application.targetFrameRate = 120;
         Time.timeScale = 1f;
         gameCamera = Camera.main;
