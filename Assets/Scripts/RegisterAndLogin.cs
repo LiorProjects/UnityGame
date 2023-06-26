@@ -166,7 +166,7 @@ public class RegisterAndLogin : MonoBehaviour
     }
     void toMainMenu()
     {
-
+        //2
         PlayerPrefs.SetString("user_name", "");
         PlayerPrefs.SetInt("user_max_score", 0);
         PlayerPrefs.SetInt("user_coins", 0);
