@@ -104,15 +104,10 @@ public class MongoDBManager : MonoBehaviour
         
     }
     //Check if user have a specific bird
-    public bool checkUserBird(string user_name, string birdName)
+    public bool checkIfUserHaveBird(string user_name, string birdName)
     {
-        // Find and update the user's birds
-        //IMongoCollection<User_def> mongoCollection = _database.GetCollection<User_def>("users");
         User_def user = getUserByUserName(user_name);
-        //var filter = Builders<User_def>.Filter.Eq("name", user.name);
         string[] user_birds = user.birds ?? (new string[0]);
-        //Debug.Log("birds array:");
-        //Debug.Log("is bird found in user's birds array?: " + user_birds.Contains(birdName));
         if (user_birds.Contains(birdName))
         {
             return true;

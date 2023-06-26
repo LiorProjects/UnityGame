@@ -10,13 +10,12 @@ using System.Diagnostics.Tracing;
 public class ShopMenu : MonoBehaviour
 {
     private Button backBtn;
-
     private Button buyBlueBird;
     private Button equipBlueBird;
-
-    private Button equipGreenBird;
-
+    private Button buyRedBird;
     private Button equipRedBird;
+    private Button buyGreenBird;
+    private Button equipGreenBird;
 
     private Sounds playSound;
     private Label playerCoins;
@@ -33,33 +32,24 @@ public class ShopMenu : MonoBehaviour
         this.playerCoins.text = "Coins: " + PlayerPrefs.GetInt("user_coins");
 
         this.backBtn = root.Q<Button>("back-btn");
-        this.equipGreenBird = root.Q<Button>("green-bird-buy-btn");
-        this.equipRedBird = root.Q<Button>("red-bird-buy-btn");
-
         backBtn.clicked += backToMenu;
-        equipGreenBird.clicked += greenBird;
-        equipRedBird.clicked += redBird;
-
+        //Buttons for Blue bird
         this.equipBlueBird = root.Q<Button>("blue-bird-equip-btn");
         this.buyBlueBird = root.Q<Button>("blue-bird-buy-btn");
-        buyBlueBird.clicked += blueBird;
-        if (mongoManager1.checkUserBird(PlayerPrefs.GetString("user_name"), "Blue"))
-        {
-            this.buyBlueBird.style.display = DisplayStyle.None;
-            //this.equipBlueBird = root.Q<Button>("blue-bird-equip-btn");
-            this.equipBlueBird.style.display = DisplayStyle.Flex;
-            equipBlueBird.clicked += blueBirdSet;
-        }
-        else
-            Debug.Log("Don't have");
+        buyBlueBird.clicked += () => buyBlueBirdFromShop(100);
+        birdShop(buyBlueBird, equipBlueBird, "Blue");
+        //Buttons for Red bird
+        this.equipRedBird = root.Q<Button>("red-bird-equip-btn");
+        this.buyRedBird = root.Q<Button>("red-bird-buy-btn");
+        buyRedBird.clicked += () => buyRedBirdFromShop(200);
+        birdShop(buyRedBird, equipRedBird, "Red");
+        //Buttons for Green bird
+        this.equipGreenBird = root.Q<Button>("green-bird-equip-btn");
+        this.buyGreenBird = root.Q<Button>("green-bird-buy-btn");
+        buyGreenBird.clicked += () => buyGreenBirdFromShop(300);
+        birdShop(buyGreenBird, equipGreenBird, "Green");
 
         Debug.Log("player coins at start() " + PlayerPrefs.GetInt("user_coins"));
-
-        //if (mongoManager1.checkUserBird(PlayerPrefs.GetString("user_name"), "Blue"))
-        //    Debug.Log("Have bird");
-        //else
-        //    Debug.Log("Don't have");
-
     }
     private void Update()
     {
@@ -70,11 +60,25 @@ public class ShopMenu : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
-    
-    //SELECT BIRD
-    void blueBird()
+
+    void birdShop(Button buyBird, Button equipBird, string birdName)
     {
-        int value = 100;
+        if (mongoManager1.checkIfUserHaveBird(PlayerPrefs.GetString("user_name"), birdName))
+        {
+            buyBird.style.display = DisplayStyle.None;
+            equipBird.style.display = DisplayStyle.Flex;
+            if(birdName == "Blue")
+                equipBird.clicked += setBlueBird;
+            else if(birdName == "Red")
+                equipBird.clicked += setRedBird;
+            else
+                equipBird.clicked += setGreenBird;
+        }
+    }
+
+    //Buy Blue bird
+    void buyBlueBirdFromShop(int value)
+    {
         if (PlayerPrefs.GetInt("user_coins") >= value)
         {
             Debug.Log("player coins \n" + PlayerPrefs.GetInt("user_coins"));
@@ -85,41 +89,57 @@ public class ShopMenu : MonoBehaviour
             //Add selected bird to DB
             mongoManager1.addNewBirdToUser(PlayerPrefs.GetString("user_name"), "Blue");
             this.buyBlueBird.style.display = DisplayStyle.None;
-            equipBlueBird.clicked += blueBirdSet;
+            equipBlueBird.clicked += setBlueBird;
         }
-
     }
-    void blueBirdSet()
+    //Set Blue bird
+    void setBlueBird()
     {
         PlayerPrefs.SetString("birdColor", "Blue");
         playSound.clickSound();
     }
-    void redBird()
+    //Buy Red bird
+    void buyRedBirdFromShop(int value)
     {
-        int value = 200;
         if (PlayerPrefs.GetInt("user_coins") >= value)
         {
+            Debug.Log("player coins \n" + PlayerPrefs.GetInt("user_coins"));
             PlayerPrefs.SetString("birdColor", "Red");
             playSound.clickSound();
             PlayerPrefs.SetInt("user_coins", PlayerPrefs.GetInt("user_coins") - value);
-            this.mongoManager1.updateUserCoins(PlayerPrefs.GetString("user_name"));
+            mongoManager1.updateUserCoins(PlayerPrefs.GetString("user_name"));
             //Add selected bird to DB
             mongoManager1.addNewBirdToUser(PlayerPrefs.GetString("user_name"), "Red");
+            this.buyRedBird.style.display = DisplayStyle.None;
+            equipRedBird.clicked += setRedBird;
         }
     }
-    void greenBird()
+    //Set Red bird
+    void setRedBird()
     {
-        int value = 300;
+        PlayerPrefs.SetString("birdColor", "Red");
+        playSound.clickSound();
+    }
+    //Buy Green bird
+    void buyGreenBirdFromShop(int value)
+    {
         if (PlayerPrefs.GetInt("user_coins") >= value)
         {
+            Debug.Log("player coins \n" + PlayerPrefs.GetInt("user_coins"));
             PlayerPrefs.SetString("birdColor", "Green");
             playSound.clickSound();
             PlayerPrefs.SetInt("user_coins", PlayerPrefs.GetInt("user_coins") - value);
-            this.mongoManager1.updateUserCoins(PlayerPrefs.GetString("user_name"));
+            mongoManager1.updateUserCoins(PlayerPrefs.GetString("user_name"));
             //Add selected bird to DB
             mongoManager1.addNewBirdToUser(PlayerPrefs.GetString("user_name"), "Green");
+            this.buyGreenBird.style.display = DisplayStyle.None;
+            equipGreenBird.clicked += setGreenBird;
         }
-        
     }
-    
+    //Set Green bird
+    void setGreenBird()
+    {
+        PlayerPrefs.SetString("birdColor", "Green");
+        playSound.clickSound();
+    }
 }
