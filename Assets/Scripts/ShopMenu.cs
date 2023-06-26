@@ -75,7 +75,7 @@ public class ShopMenu : MonoBehaviour
                 equipBird.clicked += setGreenBird;
         }
     }
-
+    //
     //Buy Blue bird
     void buyBlueBirdFromShop(int value)
     {
