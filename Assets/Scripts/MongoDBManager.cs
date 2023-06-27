@@ -40,7 +40,7 @@ public class MongoDBManager : MonoBehaviour
     //Connect to MongoDB
     private void Start()
     {
-        Debug.Log("Test");
+        
     }
     //Save player current status
     public static void SaveStatus()
@@ -122,34 +122,65 @@ public class MongoDBManager : MonoBehaviour
         return false;
     }
     //get top scores
+    //public Score[] getTopLeaderScores()
+    //{
+    //    User_def[] users = getAllUsers();
+    //    Score[] scores = new Score[0];
+    //    for(int i = 0; i < users.Length; i++)
+    //    {
+    //        for(int j=0; j < users[i].scores.Length; j++)
+    //        {
+    //            scores.Append(users[i].scores[j]);
+    //        }
+    //    }
+    //    for(int i =0; i < scores.Length; i++)
+    //    {
+    //        for(int j = 0;j<scores.Length-1; j++)
+    //        {
+    //            if (scores[j].score > scores[j + 1].score)
+    //            {
+    //                Score tmp = scores[j];
+    //                scores[j] = scores[j + 1];
+    //                scores[j+1] = tmp;
+    //            }
+    //        }
+    //    }
+    //    Score[] orderedByScore = new Score[10];
+    //    for (int i = 0; i < orderedByScore.Length; i++)
+    //    {
+    //        orderedByScore[i] = scores[i + 1 * -1];
+    //    }
+    //    return orderedByScore;
+    //}
     public Score[] getTopLeaderScores()
     {
         User_def[] users = getAllUsers();
         Score[] scores = new Score[0];
-        for(int i = 0; i < users.Length; i++)
+        for (int i = 0; i < users.Length; i++)
         {
-            for(int j=0; j < users[i].scores.Length; j++)
+            for (int j = 0; j < users[i].scores.Length; j++)
             {
-                scores.Append(users[i].scores[j]);
+                scores = scores.Append(users[i].scores[j]).ToArray();
             }
         }
-        for(int i =0; i < scores.Length; i++)
+        for (int i = 0; i < scores.Length; i++)
         {
-            for(int j = 0;j<scores.Length-1; j++)
+            for (int j = 0; j < scores.Length - 1; j++)
             {
                 if (scores[j].score > scores[j + 1].score)
                 {
                     Score tmp = scores[j];
                     scores[j] = scores[j + 1];
-                    scores[j+1] = tmp;
+                    scores[j + 1] = tmp;
                 }
             }
         }
         Score[] orderedByScore = new Score[10];
         for (int i = 0; i < orderedByScore.Length; i++)
         {
-            orderedByScore[i] = scores[i + 1 * -1];
+            orderedByScore[i] = scores[scores.Length - 1 - i];
         }
         return orderedByScore;
     }
+
 }
