@@ -13,6 +13,7 @@ public class MainMenuUI : MonoBehaviour
     //Display buttons on screen
     void Start()
     {
+        MongoDBManager.SaveStatus();
         var root = GetComponent<UIDocument>().rootVisualElement;
         playBtn = root.Q<Button>("play-btn");
         shopBtn = root.Q<Button>("shop-btn");

@@ -25,7 +25,7 @@ public class MongoDBManager : MonoBehaviour
     {
         if (instance != null && instance != this)
         {
-            Destroy(instance);
+            Destroy(instance.gameObject);
         }
         else
         {
@@ -40,7 +40,13 @@ public class MongoDBManager : MonoBehaviour
     //Connect to MongoDB
     private void Start()
     {
-       
+        Debug.Log("Test");
+    }
+    //Save player current status
+    public static void SaveStatus()
+    {
+        GameObject add = new GameObject("Status");
+        add.AddComponent<MongoDBManager>();
     }
     //Get the database
     public IMongoDatabase GetDatabase()
