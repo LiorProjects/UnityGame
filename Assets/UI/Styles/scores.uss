@@ -1,5 +1,5 @@
 .Scores {
-    position: absolute;
+    position: relative;
     margin-left: auto;
     margin-right: auto;
     margin-top: 0;
@@ -9,7 +9,8 @@
     -unity-text-outline-color: rgb(0, 0, 0);
     color: rgb(0, 0, 0);
     width: auto;
-    top: 27%;
-    right: auto;
-    left: 35%;
+    top: auto;
+    right: 10%;
+    left: auto;
+    bottom: auto;
 }

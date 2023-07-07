@@ -11,12 +11,15 @@ public class ScoreUI : MonoBehaviour
 {
     private Button backBtn;
     private IMongoDatabase database;
-    int scoreSpace = 70;
+    private Label noUserLogin;
     int numbersOfScoresToDisplay = 8;
+    string[] playerScore = { "score1", "score2", "score3", "score4", "score5", "score6", "score7", "score8"};
     void Start()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
         var parentElement = root.Q<VisualElement>("parent-element");
+        noUserLogin = root.Q<Label>("no-user-login");
+
         backBtn = root.Q<Button>("back-btn");
         backBtn.clicked += backToMenu;
         //no user loged in
@@ -38,22 +41,15 @@ public class ScoreUI : MonoBehaviour
                 //int nextPosition sets the last 8 scores the user has
                 int nextPosition = Math.Max(userScoreaFromDB.Length - numbersOfScoresToDisplay, 0);
                 Label newScore = new Label();
+                newScore = root.Q<Label>(playerScore[i]);
                 newScore.text = "Score: " + userScoreaFromDB[i + nextPosition].score + "\tDate: " + userScoreaFromDB[i + nextPosition].date;
-                newScore.style.top = 230 + scoreSpace;
-                newScore.AddToClassList("Scores");
                 parentElement.Add(newScore);
-                scoreSpace += 70;
+                newScore.style.display = DisplayStyle.Flex;
             }
-
         }
         else
         {
-            Label newScore = new Label();
-            newScore.text = "You must sign up to see this page!";
-            newScore.style.top = 230 + scoreSpace;
-            newScore.AddToClassList("Scores");
-            parentElement.Add(newScore);
-            scoreSpace += 70;
+            noUserLogin.style.display = DisplayStyle.Flex;
         }
     }
     private void backToMenu()
