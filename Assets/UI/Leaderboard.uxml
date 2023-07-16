@@ -1,9 +1,17 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Styles/scores.uss?fileID=7433441132597879392&amp;guid=08090e9dc13b8434a8d998db1740c82b&amp;type=3#scores" />
     <ui:Label text="Leaderboard" display-tooltip-when-elided="true" name="leaderboard" style="color: rgb(0, 40, 255); font-size: 42px; -unity-font-style: bold; top: 20%; margin-left: auto; margin-right: auto;" />
-    <ui:VisualElement name="parent-element" style="margin-left: auto; margin-right: auto; margin-top: auto; margin-bottom: auto; position: absolute; width: 100%; height: 100%; top: auto; left: auto;">
+    <ui:VisualElement name="parent-element" style="height: 100%; width: 100%; margin-left: auto; margin-right: auto; margin-top: auto; margin-bottom: auto; position: absolute;">
         <ui:Label text="Name:" display-tooltip-when-elided="true" name="player-text-name" class="Scores" style="display: none; top: 300px; left: 35%;" />
-        <ui:Label text="Score:" display-tooltip-when-elided="true" name="player-text-score" class="Scores" style="display: none; top: 300px; left: 970px;" />
+        <ui:Label text="Player1" display-tooltip-when-elided="true" name="player1" class="Scores" style="display: none; top: 27%; left: auto; right: 10%; margin-right: auto; margin-left: 50%; bottom: auto;" />
+        <ui:Label text="Player2" display-tooltip-when-elided="true" name="player2" class="Scores" style="display: none; top: 27%; left: auto; right: 10%; margin-right: auto; margin-left: 50%; bottom: auto;" />
+        <ui:Label text="Player3" display-tooltip-when-elided="true" name="player3" class="Scores" style="display: none; top: 27%; left: auto; right: 10%; margin-right: auto; margin-left: 50%; bottom: auto;" />
+        <ui:Label text="Player4" display-tooltip-when-elided="true" name="player4" class="Scores" style="display: none; top: 27%; left: auto; right: 10%; margin-right: auto; margin-left: 50%; bottom: auto;" />
+        <ui:Label text="Player5" display-tooltip-when-elided="true" name="player5" class="Scores" style="display: none; top: 27%; left: auto; right: 10%; margin-right: auto; margin-left: 50%; bottom: auto;" />
+        <ui:Label text="Player6" display-tooltip-when-elided="true" name="player6" class="Scores" style="display: none; top: 27%; left: auto; right: 10%; margin-right: auto; margin-left: 50%; bottom: auto;" />
+        <ui:Label text="Player7" display-tooltip-when-elided="true" name="player7" class="Scores" style="display: none; top: 27%; left: auto; right: 10%; margin-right: auto; margin-left: 50%; bottom: auto;" />
+        <ui:Label text="Player8" display-tooltip-when-elided="true" name="player8" class="Scores" style="display: none; top: 27%; left: auto; right: 10%; margin-right: auto; margin-left: 50%; bottom: auto;" />
+        <ui:Label text="You must sign up to see this page!" display-tooltip-when-elided="true" name="no-user-login" class="Scores" style="display: none; top: 27%; left: auto; right: -5px; margin-right: auto; margin-left: auto; bottom: auto;" />
     </ui:VisualElement>
     <ui:Button display-tooltip-when-elided="true" name="back-btn" style="background-image: url(&apos;project://database/Assets/Sprites/close.png?fileID=2800000&amp;guid=788b826294447a64ebbb067e7d6f2b0c&amp;type=3#close&apos;); background-color: rgba(88, 88, 88, 0); border-left-color: rgba(255, 255, 255, 0); border-right-color: rgba(255, 255, 255, 0); border-top-color: rgba(255, 255, 255, 0); border-bottom-color: rgba(255, 255, 255, 0); margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; width: 64px; height: 64px; left: 4.5%;" />
 </ui:UXML>
