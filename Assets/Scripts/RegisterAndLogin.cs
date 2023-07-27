@@ -15,6 +15,7 @@ public class RegisterAndLogin : MonoBehaviour
     //variables
     private VisualElement register;
     private VisualElement login;
+    private VisualElement loginError;
     private TextField usernameRegisterField;
     private TextField passwordRegisterField;
     private TextField usernameLoginField;
@@ -42,6 +43,8 @@ public class RegisterAndLogin : MonoBehaviour
         passwordLoginField = root.Q<TextField>("password-login-field");
         ageField = root.Q<TextField>("age-field");
 
+        loginError = root.Q<VisualElement>("error-login");
+
         registerLoginBtn = root.Q<Button>("register-login-btn");
         loginBtn = root.Q<Button>("login-btn");
         backBtn = root.Q<Button>("back-login-btn");
@@ -63,6 +66,7 @@ public class RegisterAndLogin : MonoBehaviour
     {
         register.style.display = DisplayStyle.Flex;
         login.style.display = DisplayStyle.None;
+        loginError.style.display = DisplayStyle.None;
     }
     
     private void enterGameAfterRegister()
@@ -89,7 +93,7 @@ public class RegisterAndLogin : MonoBehaviour
             if (usernameRegisterField.text.Length < 2 || usernameRegisterField.text.Length > 32 || isTaken)
             {
                 if (isTaken)
-                    Debug.Log("Username is take try another one");
+                    Debug.Log("Username is taken try another one");
                 else
                     Debug.Log("Username must be between 2 and 32 characters long");
             }
@@ -147,6 +151,7 @@ public class RegisterAndLogin : MonoBehaviour
                     if (user != null)
                     {
                         Debug.Log("This user already in game");
+                        loginError.style.display = DisplayStyle.Flex;
                         break;
                     }
                     PlayerPrefs.SetString("user_name", usernameLoginField.text);
@@ -158,6 +163,7 @@ public class RegisterAndLogin : MonoBehaviour
                     var update = Builders<User_def>.Update.Set("status", "Online");
                     mongoCollection.UpdateOne(filter, update);
                     Notifications.sendNotification("Welcome", "Welcome the user to the game", "BirdJumper", "Welcome Back " + usernameLoginField.text + "!", "icon_small", "icon_large", DateTime.Now.AddSeconds(2));
+                    loginError.style.display = DisplayStyle.None;
                     break;
                 }
                 
