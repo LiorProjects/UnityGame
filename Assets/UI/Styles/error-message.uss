@@ -1,0 +1,32 @@
+.error-message {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 40%;
+    font-size: 48px;
+    left: 30%;
+    top: 7%;
+    height: 8%;
+    -unity-background-image-tint-color: rgb(255, 0, 0);
+    background-color: rgb(255, 188, 168);
+    color: rgb(255, 35, 0);
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    bottom: auto;
+    right: auto;
+    -unity-font-style: bold;
+    -unity-text-outline-width: 0;
+    border-left-color: rgba(223, 217, 208, 0);
+    border-right-color: rgba(223, 217, 208, 0);
+    border-top-color: rgba(223, 217, 208, 0);
+    border-bottom-color: rgba(223, 217, 208, 0);
+    display: none;
+}

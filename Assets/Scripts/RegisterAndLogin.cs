@@ -16,6 +16,10 @@ public class RegisterAndLogin : MonoBehaviour
     private VisualElement register;
     private VisualElement login;
     private VisualElement loginError;
+    private VisualElement takenUsername;
+    private VisualElement usernameLength;
+    private VisualElement passwordLength;
+    private VisualElement ageError;
     private TextField usernameRegisterField;
     private TextField passwordRegisterField;
     private TextField usernameLoginField;
@@ -36,14 +40,17 @@ public class RegisterAndLogin : MonoBehaviour
         var root = GetComponent<UIDocument>().rootVisualElement;
         register = root.Q<VisualElement>("register");
         login = root.Q<VisualElement>("login");
+        loginError = root.Q<VisualElement>("error-login");
+        takenUsername = root.Q<VisualElement>("taken-username-message");
+        usernameLength = root.Q<VisualElement>("username-length-message");
+        passwordLength = root.Q<VisualElement>("password-length-message");
+        ageError = root.Q<VisualElement>("age-error-message");
         mongoManager = gameObject.AddComponent<MongoDBManager>();
         usernameRegisterField = root.Q<TextField>("username-register-field");
         passwordRegisterField = root.Q<TextField>("password-register-field");
         usernameLoginField = root.Q<TextField>("username-login-field");
         passwordLoginField = root.Q<TextField>("password-login-field");
         ageField = root.Q<TextField>("age-field");
-
-        loginError = root.Q<VisualElement>("error-login");
 
         registerLoginBtn = root.Q<Button>("register-login-btn");
         loginBtn = root.Q<Button>("login-btn");
@@ -93,17 +100,25 @@ public class RegisterAndLogin : MonoBehaviour
             if (usernameRegisterField.text.Length < 2 || usernameRegisterField.text.Length > 32 || isTaken)
             {
                 if (isTaken)
-                    Debug.Log("Username is taken try another one");
+                {
+                    clearMessageOnScreen();
+                    takenUsername.style.display = DisplayStyle.Flex;
+                }
                 else
-                    Debug.Log("Username must be between 2 and 32 characters long");
+                {
+                    clearMessageOnScreen();
+                    usernameLength.style.display = DisplayStyle.Flex;
+                }
             }
             else if (passwordRegisterField.text.Length < 8 || passwordRegisterField.text.Length > 32)
             {
-                Debug.Log("Password must be between 8 and 32 characters long");
+                clearMessageOnScreen();
+                passwordLength.style.display = DisplayStyle.Flex;
             }
             else if (ageField.text.Length < 1 || ageField.text.Length > 2 || !ageField.text.All(char.IsDigit))
             {
-                Debug.Log("Age must be between 4 and 99 and only numbers");
+                clearMessageOnScreen();
+                ageError.style.display = DisplayStyle.Flex;
             }
             else
             {
@@ -150,7 +165,6 @@ public class RegisterAndLogin : MonoBehaviour
                     var user = mongoCollection.Find(filter1).FirstOrDefault();
                     if (user != null)
                     {
-                        Debug.Log("This user already in game");
                         loginError.style.display = DisplayStyle.Flex;
                         break;
                     }
@@ -178,5 +192,13 @@ public class RegisterAndLogin : MonoBehaviour
         PlayerPrefs.SetInt("user_coins", 0);
         SceneManager.LoadScene("MainMenu");
     }
-    
+
+    //Clears the message that on the screen
+    void clearMessageOnScreen()
+    {
+        takenUsername.style.display = DisplayStyle.None;
+        usernameLength.style.display = DisplayStyle.None;
+        passwordLength.style.display = DisplayStyle.None;
+        ageError.style.display = DisplayStyle.None;
+    }
 }
