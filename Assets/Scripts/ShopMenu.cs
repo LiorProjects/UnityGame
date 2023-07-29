@@ -88,6 +88,7 @@ public class ShopMenu : MonoBehaviour
             mongoManager1.updateUserCoins(PlayerPrefs.GetString("user_name"));
             //Add selected bird to DB
             mongoManager1.addNewBirdToUser(PlayerPrefs.GetString("user_name"), "Blue");
+            mongoManager1.setBirdColor(PlayerPrefs.GetString("birdColor"));
             this.buyBlueBird.style.display = DisplayStyle.None;
             equipBlueBird.clicked += setBlueBird;
         }
@@ -96,6 +97,7 @@ public class ShopMenu : MonoBehaviour
     void setBlueBird()
     {
         PlayerPrefs.SetString("birdColor", "Blue");
+        mongoManager1.setBirdColor(PlayerPrefs.GetString("birdColor"));
         playSound.clickSound();
     }
     //Buy Red bird
@@ -110,6 +112,7 @@ public class ShopMenu : MonoBehaviour
             mongoManager1.updateUserCoins(PlayerPrefs.GetString("user_name"));
             //Add selected bird to DB
             mongoManager1.addNewBirdToUser(PlayerPrefs.GetString("user_name"), "Red");
+            mongoManager1.setBirdColor(PlayerPrefs.GetString("birdColor"));
             this.buyRedBird.style.display = DisplayStyle.None;
             equipRedBird.clicked += setRedBird;
         }
@@ -118,6 +121,7 @@ public class ShopMenu : MonoBehaviour
     void setRedBird()
     {
         PlayerPrefs.SetString("birdColor", "Red");
+        mongoManager1.setBirdColor(PlayerPrefs.GetString("birdColor"));
         playSound.clickSound();
     }
     //Buy Green bird
@@ -132,6 +136,7 @@ public class ShopMenu : MonoBehaviour
             mongoManager1.updateUserCoins(PlayerPrefs.GetString("user_name"));
             //Add selected bird to DB
             mongoManager1.addNewBirdToUser(PlayerPrefs.GetString("user_name"), "Green");
+            mongoManager1.setBirdColor(PlayerPrefs.GetString("birdColor"));
             this.buyGreenBird.style.display = DisplayStyle.None;
             equipGreenBird.clicked += setGreenBird;
         }
@@ -140,6 +145,7 @@ public class ShopMenu : MonoBehaviour
     void setGreenBird()
     {
         PlayerPrefs.SetString("birdColor", "Green");
+        mongoManager1.setBirdColor(PlayerPrefs.GetString("birdColor"));
         playSound.clickSound();
     }
 }

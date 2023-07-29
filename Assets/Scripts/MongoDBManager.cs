@@ -109,6 +109,14 @@ public class MongoDBManager : MonoBehaviour
         
         
     }
+    public void setBirdColor(string birdColor)
+    {
+        IMongoCollection<User_def> mongoCollection = this._database.GetCollection<User_def>("users", null);
+        List<User_def> usersList = mongoCollection.FindSync(user => true).ToList();
+        var filter = Builders<User_def>.Filter.Eq("name", PlayerPrefs.GetString("user_name"));
+        var update = Builders<User_def>.Update.Set("birdColor", birdColor);
+        mongoCollection.UpdateOne(filter, update);
+    }
     //Check if user have a specific bird
     public bool checkIfUserHaveBird(string user_name, string birdName)
     {

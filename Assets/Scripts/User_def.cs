@@ -16,6 +16,7 @@ public class User_def
     public string status { set; get; }
     public Score[] scores { set; get; }
     public string[] birds { set; get; }
+    public string birdColor { set; get; }
 
 
 

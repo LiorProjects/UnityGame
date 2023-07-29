@@ -132,10 +132,12 @@ public class RegisterAndLogin : MonoBehaviour
                 newUser.status = "Online";
                 newUser.scores = new Score[0];
                 newUser.birds = new string[0];
+                newUser.birdColor = "Default";
                 mongoManager.insertNewUserToDB(newUser);
                 PlayerPrefs.SetString("user_name", usernameRegisterField.text);
                 PlayerPrefs.SetInt("user_coins", newUser.coins_count);
                 PlayerPrefs.SetInt("user_max_score", newUser.max_score);
+                PlayerPrefs.SetString("birdColor", "Default");
                 SceneManager.LoadScene("MainMenu");
             }
         }
@@ -171,6 +173,7 @@ public class RegisterAndLogin : MonoBehaviour
                     PlayerPrefs.SetString("user_name", usernameLoginField.text);
                     PlayerPrefs.SetInt("user_coins", userName.coins_count);
                     PlayerPrefs.SetInt("user_max_score", userName.max_score);
+                    PlayerPrefs.SetString("birdColor", userName.birdColor);
                     SceneManager.LoadScene("MainMenu");
                     Debug.Log(usernameLoginField.text + " Login");
                     var filter = Builders<User_def>.Filter.Eq("name", PlayerPrefs.GetString("user_name"));
