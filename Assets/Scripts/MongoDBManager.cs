@@ -6,6 +6,7 @@ using System.Data.Common;
 using MongoDB.Bson;
 using System;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class MongoDBManager : MonoBehaviour
 {
@@ -61,6 +62,16 @@ public class MongoDBManager : MonoBehaviour
         var filter = Builders<User_def>.Filter.Eq("name", PlayerPrefs.GetString("user_name"));
         var update = Builders<User_def>.Update.Set("status", "Offline");
         mongoCollection.UpdateOne(filter, update);
+    }
+    //Set the player to Offline status when the game is paused
+    public void OnApplicationPause()
+    {
+        IMongoCollection<User_def> mongoCollection = this._database.GetCollection<User_def>("users", null);
+        List<User_def> usersList = mongoCollection.FindSync(user => true).ToList();
+        var filter = Builders<User_def>.Filter.Eq("name", PlayerPrefs.GetString("user_name"));
+        var update = Builders<User_def>.Update.Set("status", "Offline");
+        mongoCollection.UpdateOne(filter, update);
+        SceneManager.LoadScene("RegisterAndLogin");
     }
     public User_def[] getAllUsers()
     {
