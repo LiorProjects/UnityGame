@@ -13,7 +13,8 @@ public class ScoreUI : MonoBehaviour
     private IMongoDatabase database;
     private Label noUserLogin;
     int numbersOfScoresToDisplay = 8;
-    string[] playerScore = { "score1", "score2", "score3", "score4", "score5", "score6", "score7", "score8"};
+    string[] playerScore = { "score1", "score2", "score3", "score4", "score5", "score6", "score7", "score8" };
+    string[] playerDate = { "date1", "date2", "date3", "date4", "date5", "date6", "date7", "date8" };
     void Start()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
@@ -41,10 +42,16 @@ public class ScoreUI : MonoBehaviour
                 //int nextPosition sets the last 8 scores the user has
                 int nextPosition = Math.Max(userScoreaFromDB.Length - numbersOfScoresToDisplay, 0);
                 Label newScore = new Label();
+                Label newDate = new Label();
                 newScore = root.Q<Label>(playerScore[i]);
-                newScore.text = "Score: " + userScoreaFromDB[i + nextPosition].score + "\tDate: " + userScoreaFromDB[i + nextPosition].date;
+                newDate = root.Q<Label>(playerDate[i]);
+                //newScore.text = "Score: " + userScoreaFromDB[i + nextPosition].score + "\tDate: " + userScoreaFromDB[i + nextPosition].date;
+                newScore.text = "" + userScoreaFromDB[i + nextPosition].score;
+                newDate.text = "" + userScoreaFromDB[i + nextPosition].date.ToString("dd-MM-yyyy");
                 parentElement.Add(newScore);
+                parentElement.Add(newDate);
                 newScore.style.display = DisplayStyle.Flex;
+                newDate.style.display = DisplayStyle.Flex;
             }
         }
         else
