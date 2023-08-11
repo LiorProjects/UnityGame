@@ -60,6 +60,7 @@ public class MongoDBManager : MonoBehaviour
         IMongoCollection<User_def> mongoCollection = this._database.GetCollection<User_def>("users", null);
         List<User_def> usersList = mongoCollection.FindSync(user => true).ToList();
         var filter = Builders<User_def>.Filter.Eq("name", PlayerPrefs.GetString("user_name"));
+        PlayerPrefs.SetString("user_name", "");
         var update = Builders<User_def>.Update.Set("status", "Offline");
         mongoCollection.UpdateOne(filter, update);
     }
@@ -69,6 +70,7 @@ public class MongoDBManager : MonoBehaviour
         IMongoCollection<User_def> mongoCollection = this._database.GetCollection<User_def>("users", null);
         List<User_def> usersList = mongoCollection.FindSync(user => true).ToList();
         var filter = Builders<User_def>.Filter.Eq("name", PlayerPrefs.GetString("user_name"));
+        PlayerPrefs.SetString("user_name", "");
         var update = Builders<User_def>.Update.Set("status", "Offline");
         mongoCollection.UpdateOne(filter, update);
         SceneManager.LoadScene("RegisterAndLogin");
