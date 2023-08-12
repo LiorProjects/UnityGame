@@ -45,7 +45,6 @@ public class ScoreUI : MonoBehaviour
                 Label newDate = new Label();
                 newScore = root.Q<Label>(playerScore[i]);
                 newDate = root.Q<Label>(playerDate[i]);
-                //newScore.text = "Score: " + userScoreaFromDB[i + nextPosition].score + "\tDate: " + userScoreaFromDB[i + nextPosition].date;
                 newScore.text = "" + userScoreaFromDB[i + nextPosition].score;
                 newDate.text = "" + userScoreaFromDB[i + nextPosition].date.ToString("dd-MM-yyyy");
                 parentElement.Add(newScore);

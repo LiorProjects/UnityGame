@@ -14,7 +14,8 @@ public class LeaderboardUI : MonoBehaviour
     int scoreSpace = 70;
     int numbersOfScoresToDisplay = 0;
     private Label noUserLogin;
-    string[] playerScore = { "player1", "player2", "player3", "player4", "player5", "player6", "player7", "player8" };
+    string[] playerName = { "player1", "player2", "player3", "player4", "player5", "player6", "player7", "player8" };
+    string[] playerScore = { "score1", "score2", "score3", "score4", "score5", "score6", "score7", "score8" };
     void Start()
     {
         mongoManager = gameObject.AddComponent<MongoDBManager>();
@@ -32,27 +33,19 @@ public class LeaderboardUI : MonoBehaviour
             {
                 if(numbersOfScoresToDisplay != 8)
                 {
-                    //Label playerScore = new Label();
-                    //Label playerName = new Label();
-                    //playerName.text = "Name: " + score.user_name;
-                    //playerName.style.top = 230 + scoreSpace;
-                    //playerName.AddToClassList("Scores");
-                    //parentElement.Add(playerName);
-                    //playerScore.text = "Score: " + score.score;
-                    //playerScore.style.top = 230 + scoreSpace;
-                    //playerScore.style.left = 1050;
-                    //playerScore.AddToClassList("Scores");
-                    //parentElement.Add(playerScore);
-                    //scoreSpace += 70;
                     Label newScore = new Label();
+                    Label newName = new Label();
                     newScore = root.Q<Label>(playerScore[numbersOfScoresToDisplay]);
-                    newScore.text = "Score: " + score.score + "\tName: " + score.user_name;
+                    newName = root.Q<Label>(playerName[numbersOfScoresToDisplay]);
+                    newScore.text = "" + score.score;
+                    newName.text = "" + score.user_name;
                     parentElement.Add(newScore);
+                    parentElement.Add(newName);
                     newScore.style.display = DisplayStyle.Flex;
+                    newName.style.display = DisplayStyle.Flex;
                     numbersOfScoresToDisplay++;
                 }
             }
-
         }
         else
         {
