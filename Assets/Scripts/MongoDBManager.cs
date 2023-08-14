@@ -110,14 +110,14 @@ public class MongoDBManager : MonoBehaviour
         string[] user_birds = user.birds ?? (new string[0]);
         Debug.Log("birds array:");
         Debug.Log("is bird found in user's birds array?: "+user_birds.Contains(birdName));
-        if(!user_birds.Contains(birdName))
+        if(user_birds.Length == 0)
+            Notifications.sendNotification("First purchase", "First purchase in the shop", "First purchase", "You bought your first bird!", "icon_small", "icon_large", DateTime.Now.AddSeconds(1));
+        if (!user_birds.Contains(birdName))
         {
             user_birds.Append(birdName);
             var update = Builders<User_def>.Update.Push("birds", birdName);
             mongoCollection.UpdateOne(filter, update);
         }
-        
-        
     }
     //Set bird color
     public void setBirdColor(string birdColor)

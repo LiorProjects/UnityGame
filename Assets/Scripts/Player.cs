@@ -166,6 +166,7 @@ public class Player : MonoBehaviour
             if (PlayerPrefs.GetInt("user_max_score") < playerScore)
             {
                 PlayerPrefs.SetInt("user_max_score", playerScore);
+                Notifications.sendNotification("New high score", "New high score of the user", "Record Breaker!", "Your new high score is " + playerScore + "!", "icon_small", "icon_large", DateTime.Now.AddSeconds(1));
                 var addScore = Builders<User_def>.Update.Set("max_score", playerScore);
                 await userCollection.UpdateOneAsync(filter, addScore);
             }
@@ -181,8 +182,6 @@ public class Player : MonoBehaviour
             {
                 PlayerPrefs.SetInt("user_max_score", playerScore);
             }
-                
-
         }
     }
 }
