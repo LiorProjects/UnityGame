@@ -16,6 +16,7 @@ public class ShopMenu : MonoBehaviour
     private Button equipRedBird;
     private Button buyGreenBird;
     private Button equipGreenBird;
+    private Button equipDefaultBird;
 
     private Sounds playSound;
     private Label playerCoins;
@@ -48,6 +49,9 @@ public class ShopMenu : MonoBehaviour
         this.buyGreenBird = root.Q<Button>("green-bird-buy-btn");
         buyGreenBird.clicked += () => buyGreenBirdFromShop(300);
         birdShop(buyGreenBird, equipGreenBird, "Green");
+        //Buttons for Default bird
+        this.equipDefaultBird = root.Q<Button>("default-bird-equip-btn");
+        equipDefaultBird.clicked += setDefaultBird;
 
         Debug.Log("player coins at start() " + PlayerPrefs.GetInt("user_coins"));
     }
@@ -145,6 +149,13 @@ public class ShopMenu : MonoBehaviour
     void setGreenBird()
     {
         PlayerPrefs.SetString("birdColor", "Green");
+        mongoManager1.setBirdColor(PlayerPrefs.GetString("birdColor"));
+        playSound.clickSound();
+    }
+    //Set Default bird
+    void setDefaultBird()
+    {
+        PlayerPrefs.SetString("birdColor", "Default");
         mongoManager1.setBirdColor(PlayerPrefs.GetString("birdColor"));
         playSound.clickSound();
     }

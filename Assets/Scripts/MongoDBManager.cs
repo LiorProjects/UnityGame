@@ -38,11 +38,6 @@ public class MongoDBManager : MonoBehaviour
         if(_database == null)
             _database = _client.GetDatabase(DATABASE_NAME);
     }
-    //Connect to MongoDB
-    private void Start()
-    {
-        
-    }
     //Save player current status
     public static void SaveStatus()
     {
@@ -75,6 +70,7 @@ public class MongoDBManager : MonoBehaviour
         mongoCollection.UpdateOne(filter, update);
         SceneManager.LoadScene("RegisterAndLogin");
     }
+    //Get all users
     public User_def[] getAllUsers()
     {
         IMongoCollection<User_def> mongoCollection = this._database.GetCollection<User_def>("users", null);
@@ -82,6 +78,7 @@ public class MongoDBManager : MonoBehaviour
         User_def[] ud = usersList.ToArray();
         return ud;
     }
+    //Get user by user name
     public User_def getUserByUserName(string user_name)
     {
         IMongoCollection<User_def> mongoCollection = this._database.GetCollection<User_def>("users", null); 
@@ -122,6 +119,7 @@ public class MongoDBManager : MonoBehaviour
         
         
     }
+    //Set bird color
     public void setBirdColor(string birdColor)
     {
         IMongoCollection<User_def> mongoCollection = this._database.GetCollection<User_def>("users", null);
@@ -143,36 +141,6 @@ public class MongoDBManager : MonoBehaviour
         return false;
     }
     //get top scores
-    //public Score[] getTopLeaderScores()
-    //{
-    //    User_def[] users = getAllUsers();
-    //    Score[] scores = new Score[0];
-    //    for(int i = 0; i < users.Length; i++)
-    //    {
-    //        for(int j=0; j < users[i].scores.Length; j++)
-    //        {
-    //            scores.Append(users[i].scores[j]);
-    //        }
-    //    }
-    //    for(int i =0; i < scores.Length; i++)
-    //    {
-    //        for(int j = 0;j<scores.Length-1; j++)
-    //        {
-    //            if (scores[j].score > scores[j + 1].score)
-    //            {
-    //                Score tmp = scores[j];
-    //                scores[j] = scores[j + 1];
-    //                scores[j+1] = tmp;
-    //            }
-    //        }
-    //    }
-    //    Score[] orderedByScore = new Score[10];
-    //    for (int i = 0; i < orderedByScore.Length; i++)
-    //    {
-    //        orderedByScore[i] = scores[i + 1 * -1];
-    //    }
-    //    return orderedByScore;
-    //}
     public Score[] getTopLeaderScores()
     {
         User_def[] users = getAllUsers();

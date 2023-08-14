@@ -119,7 +119,8 @@ public class Player : MonoBehaviour
     {
         if(birdColor == "Blue") spriteRenderer.sprite = blueBird[0];
         else if(birdColor == "Green") spriteRenderer.sprite = greenBird[0];
-        else if(birdColor == "Red") spriteRenderer.sprite = redBird[0];
+        else if (birdColor == "Red") spriteRenderer.sprite = redBird[0];
+        else if (birdColor == "Default") spriteRenderer.sprite = sprites[0];
     }
     //Collision a Pole
     private void OnCollisionEnter2D(Collision2D collision)
