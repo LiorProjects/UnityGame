@@ -9,6 +9,7 @@ using UnityEngine.Networking;
 using MongoDB.Bson;
 using System.Text;
 using System;
+using System.Security.Cryptography;
 
 public class RegisterAndLogin : MonoBehaviour
 {
@@ -64,6 +65,15 @@ public class RegisterAndLogin : MonoBehaviour
         backBtn.clicked += backToRegister;
         playWithoutLogin.clicked += toMainMenu;
     }
+
+    //Turns the password into a hash for user security
+    private string hashedPassword(string password)
+    {
+        var hash = SHA256.Create();
+        byte[] bytes = hash.ComputeHash(Encoding.UTF8.GetBytes(password));
+        return BitConverter.ToString(bytes);
+    }
+
     private void toLoginMenu()
     {
         register.style.display = DisplayStyle.None;
@@ -125,7 +135,7 @@ public class RegisterAndLogin : MonoBehaviour
                 //insert new user to DB
                 User_def newUser = new();
                 newUser.name = usernameRegisterField.text;
-                newUser.password = passwordRegisterField.text;
+                newUser.password = hashedPassword(passwordRegisterField.text);
                 newUser.age = int.Parse(ageField.text);
                 newUser.coins_count = 0;
                 newUser.max_score = 0;
@@ -160,7 +170,7 @@ public class RegisterAndLogin : MonoBehaviour
             foreach (User_def userName in userData)
             {
                 //if username matches password, continue to main menu
-                if (userName.name == usernameLoginField.text && userName.password == passwordLoginField.text)
+                if (userName.name == usernameLoginField.text && userName.password == hashedPassword(passwordLoginField.text))
                 {
                     //Checks if the user already in game
                     var filter1 = Builders<User_def>.Filter.Eq("name", usernameLoginField.text) & Builders<User_def>.Filter.Eq("status", "Online");

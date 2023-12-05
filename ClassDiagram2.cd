@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="EndGameTextUI">
+    <Position X="11.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABEAAAAACAAEAAAAAAAAAAABAAAEAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\EndGameTextUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InGameTextUI">
+    <Position X="5.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAiAAAQSAAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\InGameTextUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeaderboardUI">
+    <Position X="9.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAACAAAADAAAEAAAkAAgAgAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\Scripts\LeaderboardUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainMenuUI">
+    <Position X="5.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAgAAAAAAAAgAACAAgAACAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\MainMenuUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MongoDBManager">
+    <Position X="5.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABBAggAABAEBQCEABAAAIAABAEAQAQgBAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\MongoDBManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoveBackgroud">
+    <Position X="9.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAABAQAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\MoveBackgroud.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NotificationManager">
+    <Position X="11.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\NotificationManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Notifications">
+    <Position X="9.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Notifications.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PipeSpeed">
+    <Position X="9.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\PipeSpeed.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player">
+    <Position X="3.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQAAAgAAiAAICDABAAAQGAAAEAICAAAYIAgAACIAUk=</HashCode>
+      <FileName>Assets\Scripts\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RegisterAndLogin">
+    <Position X="7.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BABAAUAABCqAAABEMAAACEEABhUgAAAAAQAAAABAEAA=</HashCode>
+      <FileName>Assets\Scripts\RegisterAndLogin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Score">
+    <Position X="18.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAABIAAAAgAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Score.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScoreUI">
+    <Position X="11.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAADAAAAAAAkAAAAAQAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\Scripts\ScoreUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShopMenu">
+    <Position X="7.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQQAAAAAiAAAAAACAAAyAsAEAAICIAAAAAIAAgAUEA=</HashCode>
+      <FileName>Assets\Scripts\ShopMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sounds">
+    <Position X="1.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAAgAgAAAAAAEAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Sounds.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpawnPipes">
+    <Position X="3.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAEAEAACGAAACAAAQAAAAIACAgAAgACAA=</HashCode>
+      <FileName>Assets\Scripts\SpawnPipes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="User_def">
+    <Position X="19" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAQAAABABIAAAAAAAEAAAAAIAAAgAAAgA=</HashCode>
+      <FileName>Assets\Scripts\User_def.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UnityEngine.MonoBehaviour">
+    <Position X="1.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Object">
+    <Position X="21.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
