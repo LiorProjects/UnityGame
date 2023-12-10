@@ -21,6 +21,7 @@ public class RegisterAndLogin : MonoBehaviour
     private VisualElement usernameLength;
     private VisualElement passwordLength;
     private VisualElement ageError;
+    private VisualElement wrongPasswordOrUsername;
     private TextField usernameRegisterField;
     private TextField passwordRegisterField;
     private TextField usernameLoginField;
@@ -46,6 +47,7 @@ public class RegisterAndLogin : MonoBehaviour
         usernameLength = root.Q<VisualElement>("username-length-message");
         passwordLength = root.Q<VisualElement>("password-length-message");
         ageError = root.Q<VisualElement>("age-error-message");
+        wrongPasswordOrUsername = root.Q<VisualElement>("wrong-password-or-username-login");
         mongoManager = gameObject.AddComponent<MongoDBManager>();
         usernameRegisterField = root.Q<TextField>("username-register-field");
         passwordRegisterField = root.Q<TextField>("password-register-field");
@@ -192,6 +194,10 @@ public class RegisterAndLogin : MonoBehaviour
                     Notifications.sendNotification("Welcome", "Welcome the user to the game", "BirdJumper", "Welcome Back " + usernameLoginField.text + "!", "icon_small", "icon_large", DateTime.Now.AddSeconds(2));
                     loginError.style.display = DisplayStyle.None;
                     break;
+                }
+                else
+                {
+                    wrongPasswordOrUsername.style.display = DisplayStyle.Flex;
                 }
                 
             }
