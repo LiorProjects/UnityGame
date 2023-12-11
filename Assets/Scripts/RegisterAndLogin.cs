@@ -193,6 +193,7 @@ public class RegisterAndLogin : MonoBehaviour
                     mongoCollection.UpdateOne(filter, update);
                     Notifications.sendNotification("Welcome", "Welcome the user to the game", "BirdJumper", "Welcome Back " + usernameLoginField.text + "!", "icon_small", "icon_large", DateTime.Now.AddSeconds(2));
                     loginError.style.display = DisplayStyle.None;
+                    wrongPasswordOrUsername.style.display = DisplayStyle.None;
                     break;
                 }
                 else
